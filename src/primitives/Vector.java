@@ -47,6 +47,7 @@ public class Vector extends Point {
     public double lengthSquared(){
         return dotProduct(this);
     }
+
     public double length(){
         return Math.sqrt(lengthSquared());
     }

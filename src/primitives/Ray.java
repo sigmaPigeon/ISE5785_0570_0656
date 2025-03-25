@@ -1,29 +1,30 @@
 package primitives;
 
 public class Ray {
-    Point head;
-    Vector direction;
+    protected final Point head;
+    protected final Vector direction;
 
-    public Ray(Point p,Vector v){
-        head=p;
+    public Ray(Point p, Vector v) {
+        head = p;
         direction = v.normalize();
     }
 
     @Override
     public boolean equals(Object obj) {
-        if(obj==this){
+        if (obj == this) {
             return true;
         }
-        if(!(obj instanceof Ray tmp)){
+        if (!(obj instanceof Ray tmp)) {
             return false;
         }
         return head.equals(tmp.head)
-                &&direction.equals(tmp.direction);
+                && direction.equals(tmp.direction);
     }
 
     @Override
     public String toString() {
-        return "head = "+head.toString()
-                +"direction = "+direction.toString();
+        return "head = " + head.toString()
+                + "direction = " + direction.toString();
+
     }
 }
