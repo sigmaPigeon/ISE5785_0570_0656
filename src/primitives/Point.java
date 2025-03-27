@@ -34,4 +34,8 @@ public class Point {
         double diffZ = xyz.d3() - point.xyz.d3();
         return diffX*diffX + diffY*diffY + diffZ*diffZ;
     }
+
+    public double distance(Point point){
+        return Math.sqrt(distanceSquared(point));
+    }
 }
