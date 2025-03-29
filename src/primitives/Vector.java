@@ -4,12 +4,15 @@ public class Vector extends Point {
 
     public Vector(double x,double y ,double z) {
         super(x,y,z);
-        if(equals(ZERO))  
-            throw new IllegalArgumentException("zero vector");
+        if(super.equals(ZERO))
+            throw new IllegalArgumentException("ERROR:zero vector");
     }
 
     public Vector(Double3 xyz) {
         super(xyz);
+        if(equals(ZERO)){
+            throw new IllegalArgumentException("ERROR:zero vector");
+        }
     }
 
     @Override
@@ -23,6 +26,9 @@ public class Vector extends Point {
     public String toString() { return "->" + super.toString(); }
 
     public Vector add(Vector v){
+        if(xyz.equals(v.scale(-1).xyz)){
+            throw new IllegalArgumentException("ERROR: zero vector");
+        }
         return new Vector(xyz.add(v.xyz));
     }
 
@@ -35,13 +41,14 @@ public class Vector extends Point {
     }
 
     public Vector crossProduct(Vector v){
-        double a1=xyz.d1();
-        double a2=xyz.d2();
-        double a3=xyz.d3();
-        double b1=v.xyz.d1();
-        double b2=v.xyz.d2();
-        double b3=xyz.d3();
-        return new Vector(a2*b3-a3*b2,a3*b1-a1*b3,a1*b2-a2*b1);
+        double a1=xyz.d1(),a2=xyz.d2(),a3=xyz.d3();
+        double b1=v.xyz.d1(),b2=v.xyz.d2(),b3=v.xyz.d3();
+
+        double c1=a2*b3-a3*b2,c2=a3*b1-a1*b3,c3=a1*b2-a2*b1;
+        if(Util.isZero(c1*c1+c2*c2+c3*c3)){
+            throw new IllegalArgumentException("ERROR:parallel vectors");
+        }
+        return new Vector(c1,c2,c3);
     }
 
     public double lengthSquared(){

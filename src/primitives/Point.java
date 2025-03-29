@@ -22,9 +22,15 @@ public class Point {
     @Override
     public String toString() { return "" + xyz; }
 
-    public Point add(Vector vec){ return new Point(xyz.add(vec.xyz)); }
+    public Point add(Vector vec){
+
+        return new Point(xyz.add(vec.xyz));
+    }
 
     public Vector subtract(Point point){
+        if(this.equals(point)){
+            throw new IllegalArgumentException("ERROR:zero vector");
+        }
         return new Vector(xyz.subtract(point.xyz));
     }
 
