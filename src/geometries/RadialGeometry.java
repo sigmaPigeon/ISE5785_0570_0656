@@ -1,10 +1,9 @@
 package geometries;
 
-abstract public class RadialGeometry extends Geometry
-{
+abstract public class RadialGeometry extends Geometry {
     double radius;
 
-    RadialGeometry(double r){
+    RadialGeometry(double r) {
         radius = r;
     }
 }
