@@ -6,7 +6,7 @@ import primitives.Vector;
 /**
  * class to represent a plane in the space
  */
-public class Plane {
+public class Plane extends Geometry {
     private final Point q;
     private final Vector normal;
 
@@ -32,15 +32,13 @@ public class Plane {
     }
 
     /**
-     * method to get the normal of a plane
-     * @return normal vector
-     */
-    public Vector getNormal() {return normal;}
-
-    /**
      * method to get a normal vector of a plane based on a point
-     * @param p1 the first direction where we want the normal vector to start from
+     * @param unused
      * @return the normal vector from the point
      */
-    public Vector getNormal(Point p1) { return normal;}
+
+    @Override
+    public Vector getNormal(Point unused) {
+        return null;
+    }
 }
