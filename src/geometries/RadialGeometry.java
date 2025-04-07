@@ -1,9 +1,17 @@
 package geometries;
 
-abstract public class RadialGeometry extends Geometry {
+/**
+ * interface class to define a geometry object that uses radius in its calculations
+ */
+abstract public class RadialGeometry extends Geometry
+{
     double radius;
 
-    RadialGeometry(double r) {
+    /**
+     * constructor to initialize the radius of a radial geometry object
+     * @param r the radius
+     */
+    public RadialGeometry(double r){
         radius = r;
     }
 }
