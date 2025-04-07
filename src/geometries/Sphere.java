@@ -4,7 +4,7 @@ import primitives.Point;
 import primitives.Vector;
 
 /**
- * class to represent a sphere in the space
+ * class to represent a sphere in the 3D space
  */
 public class Sphere extends RadialGeometry {
     private final Point center;
