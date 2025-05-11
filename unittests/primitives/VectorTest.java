@@ -6,6 +6,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class VectorTest {
     @Test
+    void constructor() {
+        // ============ Equivalence Partitions Tests ==============
+        // TC01: Test the constructor of a vector
+        Vector v1 = new Vector(1, 2, 3);
+        assertNotNull(v1, "Vector constructor failed");
+
+        // TC02: Test the constructor of a zero vector
+        assertThrows(IllegalArgumentException.class, () -> {
+            Vector zeroVector = new Vector(0, 0, 0);
+        }, "Zero vector should throw an exception");
+    }
+    @Test
     void add() {
         // ============ Equivalence Partitions Tests ==============
         // TC01: Test the addition of two vectors
