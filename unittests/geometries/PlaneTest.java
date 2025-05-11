@@ -68,7 +68,6 @@ class PlaneTest {
         Vector expectedNormal2 = new Vector(0, 0, -1);
         // Verify if one of the normal vectors is a unit vector
         assertEquals(expectedNormal1, plane.getNormal(new Point(0,0 ,0 )), "Plane normal is not correct");
-        assertEquals(expectedNormal2, plane.getNormal(new Point(0,0 ,0 )), "Plane normal is not correct");
     }
 
 }
