@@ -27,6 +27,19 @@ public class Cylinder extends Tube{
      */
     @Override
     public Vector getNormal(Point point){
-        return null;
+        //if the point is on the top or bottom base of the cylinder
+        if (point.equals(axis.getHead()) || point.equals(axis.getHead().add(axis.getDirection().scale(height)))) {
+            return axis.getDirection();
+        }
+        // The normal vector of a cylinder at a point is the vector from the axis to that point
+        Vector v = point.subtract(axis.getHead());
+        double t = axis.getDirection().dotProduct(v);
+        // If the point is on the axis, return the normalized vector
+        if (t == 0) {
+            return v.normalize();
+        }
+        // If the point is not on the axis, find the projection of the point onto the axis
+        Point o = axis.getHead().add(axis.getDirection().scale(t));
+        return point.subtract(o).normalize();
     }
 }
