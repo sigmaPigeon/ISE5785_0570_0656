@@ -16,6 +16,10 @@ public class Point {
      */
     protected final Double3 xyz;
 
+    public Double3 getXyz() {
+        return xyz;
+    }
+
     /**
      * Constructs a Point with the specified coordinates.
      *

@@ -1,5 +1,6 @@
 package geometries;
 
+import primitives.Double3;
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
@@ -28,7 +29,10 @@ public class Cylinder extends Tube{
     @Override
     public Vector getNormal(Point point){
         //if the point is on the top or bottom base of the cylinder
-        if (point.equals(axis.getHead()) || point.equals(axis.getHead().add(axis.getDirection().scale(height)))) {
+        Vector v1 = new Vector(point.getXyz());
+        Vector v2 = new Vector(axis.getHead().getXyz());
+        if (v1.dotProduct(axis.getDirection()) == v2.dotProduct(axis.getDirection()) ||
+                v1.dotProduct(axis.getDirection()) == height + v2.dotProduct(axis.getDirection())) {
             return axis.getDirection();
         }
         // The normal vector of a cylinder at a point is the vector from the axis to that point
