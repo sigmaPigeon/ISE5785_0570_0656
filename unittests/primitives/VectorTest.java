@@ -5,9 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class VectorTest {
-
     @Test
-
     void add() {
         // ============ Equivalence Partitions Tests ==============
         // TC01: Test the addition of two vectors
