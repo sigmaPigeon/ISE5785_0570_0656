@@ -25,6 +25,7 @@ class PlaneTest {
         assertEquals(1, normal.length(), DELTA, "Plane's normal is not a unit vector");
         assertEquals(0, normal.dotProduct(p2.subtract(p1)), DELTA, "Plane's normal is not orthogonal to the first edge");
         assertEquals(0, normal.dotProduct(p3.subtract(p1)), DELTA, "Plane's normal is not orthogonal to the second edge");
+
         //============== Boundary Values Tests ==================
         //TC10: Test the constructor of a plane using the first 2 points that are coalesced
         assertThrows(IllegalArgumentException.class, () -> {

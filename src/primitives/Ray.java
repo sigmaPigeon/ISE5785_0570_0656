@@ -44,4 +44,12 @@ public class Ray {
                 + "direction = " + direction.toString();
 
     }
+
+    public Point getHead() {
+        return head;
+    }
+
+    public Vector getDirection() {
+        return direction;
+    }
 }

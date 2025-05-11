@@ -17,7 +17,8 @@ public class Plane extends Geometry {
      * @param p3 third point
      */
     public Plane(Point p1,Point p2,Point p3){
-        normal = null;
+        // Create a plane using 3 points
+        normal = p2.subtract(p1).crossProduct(p3.subtract(p1)).normalize();
         q = p1;
     }
 
@@ -33,12 +34,18 @@ public class Plane extends Geometry {
 
     /**
      * method to get a normal vector of a plane based on a point
-     * @param unused
+     * @param p1 the point we want the normal from
      * @return the normal vector from the point
      */
 
     @Override
-    public Vector getNormal(Point unused) {
-        return null;
+    public Vector getNormal(Point p1) {
+        // If the normal is already defined, return it
+        if (normal != null) {
+            return normal;
+        }
+        Vector v1 = p1.subtract(q);
+        Vector v2 = p1.subtract(q);
+        return v1.crossProduct(v2).normalize();
     }
 }
