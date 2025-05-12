@@ -1,7 +1,10 @@
 package geometries;
 
 import primitives.Point;
+import primitives.Ray;
 import primitives.Vector;
+
+import java.util.List;
 
 /**
  * class to represent a sphere in the 3D space
@@ -28,5 +31,14 @@ public class Sphere extends RadialGeometry {
     public Vector getNormal(Point point){
         // The normal vector of a sphere at a point is the vector from the center to that point
         return point.subtract(center).normalize();
+    }
+
+    /**
+     * @param ray the ray to intersect with
+     * @return
+     */
+    @Override
+    public List<Point> findIntersections(Ray ray) {
+        return null;
     }
 }

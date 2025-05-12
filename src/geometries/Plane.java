@@ -1,7 +1,10 @@
 package geometries;
 
 import primitives.Point;
+import primitives.Ray;
 import primitives.Vector;
+
+import java.util.List;
 
 /**
  * class to represent a plane in the space
@@ -47,5 +50,14 @@ public class Plane extends Geometry {
         Vector v1 = p1.subtract(q);
         Vector v2 = p1.subtract(q);
         return v1.crossProduct(v2).normalize();
+    }
+
+    /**
+     * @param ray the ray to intersect with
+     * @return
+     */
+    @Override
+    public List<Point> findIntersections(Ray ray) {
+        return null;
     }
 }
