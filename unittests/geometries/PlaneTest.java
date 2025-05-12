@@ -8,7 +8,18 @@ import primitives.Ray;
 import primitives.Vector;
 
 import java.util.List;
-
+/**
+ * Unit tests for {@link geometries.Plane}.
+ * This class contains tests for the constructor, normal vector calculation, and intersection
+ * of a plane with a ray.
+ * <p>
+ * The tests cover:
+ * <ul>
+ *     <li>Constructor with three points</li>
+ *     <li>Normal vector calculation</li>
+ *     <li>Intersection with a ray</li>
+ * </ul>
+ */
 class PlaneTest {
     private static final double DELTA = 0.000001;    /**
      * Test method for {@link geometries.Plane#Plane(primitives.Point, primitives.Vector)}.
@@ -72,7 +83,7 @@ class PlaneTest {
         // Verify if one of the normal vectors is a unit vector
         assertEquals(expectedNormal1, plane.getNormal(new Point(0,0 ,0 )), "Plane normal is not correct");
     }
-    /*
+     /*
         * Test method for {@link geometries.Plane#findIntersections(primitives.Ray)}.
      */
     @Test

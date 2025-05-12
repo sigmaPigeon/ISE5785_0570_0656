@@ -3,9 +3,34 @@ package primitives;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * Unit tests for {@link Vector} class.
+ * <p>
+ * This class contains tests for the following methods:
+ * <ul>
+ *     <li>Constructor</li>
+ *     <li>Addition</li>
+ *     <li>Subtraction</li>
+ *     <li>Dot product</li>
+ *     <li>Cross product</li>
+ *     <li>Length squared</li>
+ *     <li>Length</li>
+ *     <li>Normalization</li>
+ * </ul>
+ */
 class VectorTest {
     @Test
+    /**
+     * Test method for {@link Vector#Vector(double, double, double)}.
+     * <p>
+     * This method checks the correctness of the constructor for a vector.
+     * <p>
+     * The test cases cover:
+     * <ul>
+     *     <li>Constructor with valid values</li>
+     *     <li>Constructor with zero vector (should throw an exception)</li>
+     * </ul>
+     */
     void constructor() {
         // ============ Equivalence Partitions Tests ==============
         // TC01: Test the constructor of a vector
@@ -18,6 +43,16 @@ class VectorTest {
         }, "Zero vector should throw an exception");
     }
     @Test
+    /**
+     * Test method for {@link Vector#add(Vector)}.
+     * <p>
+     * This method checks the correctness of the addition of two vectors.
+     * <p>
+     * The test cases cover:
+     * <ul>
+     *     <li>Addition of two vectors</li>
+     * </ul>
+     */
     void add() {
         // ============ Equivalence Partitions Tests ==============
         // TC01: Test the addition of two vectors
@@ -29,6 +64,16 @@ class VectorTest {
     }
 
     @Test
+    /**
+     * Test method for {@link Vector#subtract(Vector)}.
+     * <p>
+     * This method checks the correctness of the subtraction of two vectors.
+     * <p>
+     * The test cases cover:
+     * <ul>
+     *     <li>Subtraction of two vectors</li>
+     * </ul>
+     */
     void scale() {
         // ============ Equivalence Partitions Tests ==============
         // TC01: Test the subtraction of two vectors
@@ -40,6 +85,16 @@ class VectorTest {
     }
 
     @Test
+    /**
+     * Test method for {@link Vector#dotProduct(Vector)}.
+     * <p>
+     * This method checks the correctness of the dot product of two vectors.
+     * <p>
+     * The test cases cover:
+     * <ul>
+     *     <li>Dot product of two vectors</li>
+     * </ul>
+     */
     void dotProduct() {
         // ============ Equivalence Partitions Tests ==============
         // TC01: Test the dot product of two vectors
@@ -49,7 +104,16 @@ class VectorTest {
         // The expected value is the dot product of the two vectors
         assertEquals(expected, v1.dotProduct(v2), "Dot product of two vectors failed");
     }
-
+/**
+     * Test method for {@link Vector#crossProduct(Vector)}.
+     * <p>
+     * This method checks the correctness of the cross product of two vectors.
+     * <p>
+     * The test cases cover:
+     * <ul>
+     *     <li>Cross product of two vectors</li>
+     * </ul>
+     */
     @Test
     void crossProduct() {
         // ============ Equivalence Partitions Tests ==============
@@ -67,7 +131,16 @@ class VectorTest {
             parallelV1.crossProduct(parallelV2);
         }, "Cross product of parallel vectors should throw an exception");
     }
-
+/**
+     * Test method for {@link Vector#lengthSquared()}.
+     * <p>
+     * This method checks the correctness of the length squared of a vector.
+     * <p>
+     * The test cases cover:
+     * <ul>
+     *     <li>Length squared of a vector</li>
+     * </ul>
+     */
     @Test
     void lengthSquared() {
         // ============ Equivalence Partitions Tests ==============
@@ -77,7 +150,16 @@ class VectorTest {
         // The expected value is the square of the length of the vector
         assertEquals(expected, v1.lengthSquared(), "Length squared of a vector failed");
         }
-
+/**
+     * Test method for {@link Vector#length()}.
+     * <p>
+     * This method checks the correctness of the length of a vector.
+     * <p>
+     * The test cases cover:
+     * <ul>
+     *     <li>Length of a vector</li>
+     * </ul>
+     */
     @Test
     void length() {
         // ============ Equivalence Partitions Tests ==============
@@ -87,7 +169,16 @@ class VectorTest {
         // The expected value is the length of the vector
         assertEquals(expected, v1.length(), "Length of a vector failed");
     }
-
+/**
+     * Test method for {@link Vector#normalize()}.
+     * <p>
+     * This method checks the correctness of the normalization of a vector.
+     * <p>
+     * The test cases cover:
+     * <ul>
+     *     <li>Normalization of a vector</li>
+     * </ul>
+     */
     @Test
     void normalize() {
         // ============ Equivalence Partitions Tests ==============

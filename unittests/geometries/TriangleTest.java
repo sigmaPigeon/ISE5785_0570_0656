@@ -5,7 +5,16 @@ import primitives.Point;
 import primitives.Vector;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * Unit tests for {@link geometries.Triangle#getNormal(Point)}.
+ * This class contains tests for the normal vector calculation of a triangle.
+ * <p>
+ * The tests cover:
+ * <ul>
+ *     <li>Normal at a point on the triangle's surface</li>
+ *     <li>Normal at a point outside the triangle</li>
+ * </ul>
+ */
 class TriangleTest {
     private static final double DELTA = 0.000001;
 
