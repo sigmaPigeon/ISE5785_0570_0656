@@ -8,7 +8,18 @@ import primitives.Vector;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * Unit tests for {@link geometries.Sphere}.
+ * This class contains tests for the constructor, normal vector calculation, and intersection
+ * of a sphere with a ray.
+ * <p>
+ * The tests cover:
+ * <ul>
+ *     <li>Constructor with center and radius</li>
+ *     <li>Normal vector calculation</li>
+ *     <li>Intersection with a ray</li>
+ * </ul>
+ */
 class SphereTest {
     @Test
     void testGetNormal() {
