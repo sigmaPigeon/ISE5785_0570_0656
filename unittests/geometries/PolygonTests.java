@@ -139,6 +139,5 @@ class PolygonTests {
         Point p12 = new Point(0, -1, 2);
         Vector v12 = new Vector(-1, 0, 0);
         assertNull(polygon.findIntersections(new Ray(p12, v12)), "Ray's line crosses polygon");
-
     }
 }
