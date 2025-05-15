@@ -96,8 +96,10 @@ public class Polygon extends Geometry {
 
 
     /**
+     * Find the intersection points of a ray with the polygon
+     *
      * @param ray the ray to intersect with
-     * @return
+     * @return list of intersection points or null if there are no intersections
      */
     @Override
     public List<Point> findIntersections(Ray ray) {
@@ -105,20 +107,22 @@ public class Polygon extends Geometry {
         List<Point> intersections = plane.findIntersections(ray);
         if (intersections == null) return null; // The ray is parallel to the plane
         // Check if the intersection point is inside the polygon
-        for (Point intersection : intersections) {
-            Vector n1 = vertices.get(0).subtract(intersection);
-            Vector n2 = vertices.get((1) % size).subtract(intersection);
-            int flag = n1.crossProduct(n2).dotProduct(plane.getNormal(null)) > 0 ? 1 : -1;
-            for (int i = 1; i < size; ++i) {
-                if (intersection.equals(vertices))
-                    intersections.remove(intersection);// The intersection point is a vertex of the polygon
-                n1 = vertices.get(i).subtract(intersection);
-                n2 = vertices.get((i + 1) % size).subtract(intersection);
-                flag = n1.crossProduct(n2).dotProduct(plane.getNormal(null)) > 0 ? flag++ : flag--;
-            }
-            if (abs(flag) == size)
-                return List.of(intersection);// The intersection point is outside the polygon
+        if (intersections.get(0).equals(vertices.get(0)) || intersections.get(0).equals(vertices.get(1)))
+            return null; // The intersection point is a vertex of the polygon
+        Vector n1 = vertices.get(0).subtract(intersections.get(0));
+        Vector n2 = vertices.get(1).subtract(intersections.get(0));
+        int flag = n1.crossProduct(n2).dotProduct(plane.getNormal(null)) > 0 ? 1 : -1;
+        for (int i = 1; i < size; ++i) {
+            if (intersections.get(0).equals(vertices.get((i+1)%size)))
+                return null;// The intersection point is a vertex of the polygon
+            n1 = vertices.get(i).subtract(intersections.get(0));
+            n2 = vertices.get((i + 1) % size).subtract(intersections.get(0));
+            if(n1.dotProduct(n2) == 1 || n1.dotProduct(n2) == -1 || n1.equals(n2.scale(-1)))
+                return null; // The intersection point is on the edge of the polygon
+            flag = n1.crossProduct(n2).dotProduct(plane.getNormal()) > 0 ? flag++ : flag--;
         }
-    return null;// The intersection point is inside the polygon}
+        if (abs(flag) == size) return List.of(intersections.get(0));
+        // The intersection point is outside the polygon
+        return null;
     }
 }

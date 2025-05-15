@@ -1,4 +1,4 @@
-package unittests.geometries;
+package geometries;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -87,4 +87,47 @@ class PolygonTests {
          assertEquals(0d, result.dotProduct(pts[i].subtract(pts[i == 0 ? 3 : i - 1])), DELTA,
                       "Polygon's normal is not orthogonal to one of the edges");
    }
+
+    /**
+     * Test method for {@link geometries.Polygon#findIntersections(primitives.Ray)}.
+     */
+    @Test
+   void testFindIntersections(){
+        // ============ Equivalence Partitions Tests ==============
+        // TC01: Ray's line is inside the polygon
+        Polygon polygon = new Polygon(new Point(0, 0, 1),
+                                       new Point(1, 0, 0),
+                                       new Point(0, 1, 0),
+                                       new Point(-1, 1, 1));
+        Point p01 = new Point(0.5, 0.5, 0);
+        Vector v01 = new Vector(0, 0.5, 0);
+        assertNull(polygon.findIntersections(new Ray(p01, v01)), "Ray's line out of polygon");
+
+        // TC02: Ray intersects the edge of the polygon
+        Point p02 = new Point(2, 2, 0);
+        Vector v02 = new Vector(-1, -1, 0);
+        assertNull(polygon.findIntersections(new Ray(p02, v02)), "Ray's line crosses polygon");
+
+        // TC03: Ray intersects the vertex of the polygon
+        Point p03 = new Point(0, 3, 0);
+        Vector v03 = new Vector(0, -2, 0);
+        assertNull(polygon.findIntersections(new Ray(p03, v03)), "Ray's line crosses polygon");
+
+        //============= Boundary Values Tests ==================
+        // TC10: Ray starts at the edge of the polygon
+        Point p10 = new Point(1, 1, 0);
+        Vector v10 = new Vector(1, 1, 0);
+        assertNull(polygon.findIntersections(new Ray(p10, v10)), "Ray's line crosses polygon");
+
+        // TC11: Ray starts at the vertex of the polygon
+        Point p11 = new Point(0, 2, 0);
+        Vector v11 = new Vector(1, 1, 0);
+        assertNull(polygon.findIntersections(new Ray(p11,v11)), "Ray's line crosses polygon");
+
+        // TC12: Ray starts at the continuation of the edge polygon and goes inside
+        Point p12 = new Point(0, -1, 2);
+        Vector v12 = new Vector(-1, 0, 0);
+        assertNull(polygon.findIntersections(new Ray(p12, v12)), "Ray's line crosses polygon");
+
+    }
 }
