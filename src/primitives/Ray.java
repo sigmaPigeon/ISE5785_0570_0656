@@ -16,7 +16,7 @@ public class Ray {
      */
     public Ray(Point p, Vector v) {
         head = p;
-        direction = v.normalize();
+        direction = v;
     }
 
     /**
@@ -67,7 +67,7 @@ public class Ray {
      */
     public Point getPoint(double t) {
         if(isZero(t)) {
-            throw new IllegalArgumentException("t cannot be zero");
+            return head;
         }
         return head.add(direction.scale(t));
     }
