@@ -2,6 +2,7 @@ package geometries;
 
 import primitives.Point;
 import primitives.Ray;
+import primitives.Vector;
 
 import java.util.List;
 
@@ -19,8 +20,9 @@ public class Triangle extends Polygon {
      * @return unused
      */
     @Override
-    public List<Point> findIntersections(Ray ray) {
-        return null;
+    public List<Point> findIntersections(Ray ray){
+        // The intersection of a ray with a triangle is the same as the intersection of the ray with the polygon
+        return super.findIntersections(ray);
     }
 }
 

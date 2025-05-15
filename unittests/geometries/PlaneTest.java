@@ -90,15 +90,15 @@ class PlaneTest {
     void testFindIntersections() {
         // ============ Equivalence Partitions Tests ==============
         // TC01: Test the intersection of a ray with a plane
-        Plane plane = new Plane(new Point(0, 0, 0), new Vector(0, 0, 1));
-        Ray ray = new Ray(new Point(1, 1, 1), new Vector(0, 2, 2));
+        Plane plane = new Plane(new Point(0, 1, 0), new Vector(0, 0, 1));
+        Ray ray = new Ray(new Point(1, 1, 1), new Vector(0, -1, -1));
         Point expectedIntersection = new Point(1, 0, 0);
         List<Point> intersections = plane.findIntersections(ray);
         assertEquals(1,intersections.size(), "Plane intersection failed");
         assertEquals(expectedIntersection, intersections.get(0), "Plane intersection point is not correct");
 
         // TC02: Test the intersection of a ray that does not intersect with the plane
-        Ray nonIntersectingRay = new Ray(new Point(1, 1, 1), new Vector(0, -1, -1));
+        Ray nonIntersectingRay = new Ray(new Point(1, 1, 1), new Vector(0, 1, 1));
         List<Point> nonIntersectingIntersections = plane.findIntersections(nonIntersectingRay);
         assertNull(nonIntersectingIntersections, "Plane intersection should be null for non-intersecting ray");
 
@@ -117,7 +117,7 @@ class PlaneTest {
         Ray beforePlaneRay = new Ray(new Point(-1, -1, -1), new Vector(0, 0, 2));
         List<Point> beforePlaneIntersections = plane.findIntersections(beforePlaneRay);
         assertEquals(1, beforePlaneIntersections.size(), "Plane intersection failed");
-        assertEquals(new Point(1, 1, 0), beforePlaneIntersections.get(0), "Plane intersection point is not correct");
+        assertEquals(new Point(-1, -1, 0), beforePlaneIntersections.get(0), "Plane intersection point is not correct");
 
         // TC13: Test the intersection of a vertical ray that is after the plane
         Ray afterPlaneRay = new Ray(new Point(1, 1, 1), new Vector(0, 0, -2));
@@ -136,7 +136,7 @@ class PlaneTest {
         assertNull(onPlaneIntersections2, "Plane intersection should be null for on-plane ray");
 
         // TC16: Test the intersection of a ray that starts on the starting point of the plane
-        Ray startOnPlaneRay = new Ray(new Point(0, 0, 0), new Vector(1, 1, 1));
+        Ray startOnPlaneRay = new Ray(new Point(0, 1, 0), new Vector(1, 1, 1));
         List<Point> startOnPlaneIntersections = plane.findIntersections(startOnPlaneRay);
         assertNull(startOnPlaneIntersections, "Plane intersection should be null for ray starting on plane");
 
