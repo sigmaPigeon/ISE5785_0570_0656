@@ -6,6 +6,9 @@ import primitives.Vector;
 
 import java.util.List;
 
+import static primitives.Util.alignZero;
+import static primitives.Util.isZero;
+
 /**
  * class to represent a plane in the space
  */
@@ -58,6 +61,24 @@ public class Plane extends Geometry {
      */
     @Override
     public List<Point> findIntersections(Ray ray) {
-        return null;
+        if(ray.getHead().equals(q)) return null; // The ray starts on the plane point
+        // Check if the ray intersects with the plane
+        Vector n = normal;
+        Vector v = ray.getDirection();
+        double nv = n.dotProduct(v);
+        if (isZero(nv)) {
+            return null; // The ray is parallel to the plane
+        }
+        // Calculate the intersection point
+        double d = n.dotProduct(q.subtract(ray.getHead()));
+        if (isZero(d)) {
+            return null; // The ray is on the plane or starts inside it
+        }
+        double t1 = alignZero(d / nv);
+        if (t1 < 0) {
+            return null; // The intersection point is behind the ray's head
+        }
+        Point intersectionPoint = ray.getHead().add(v.scale(t1));
+        return List.of(intersectionPoint);
     }
 }

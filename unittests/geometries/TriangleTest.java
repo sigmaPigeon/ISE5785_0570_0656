@@ -73,8 +73,7 @@ class TriangleTest {
         // TC12: Ray starts at the continuation of the edge triangle and goes inside
         Point p12 = new Point(3, 0, 0);
         Vector v12 = new Vector(-1, 0, 0);
-        Point expectedP3 = new Point(2, 0, 0);
-        assertEquals(expectedP3,triangle.findIntersections(new Ray(p12, v12)), "Ray's line crosses triangle");
+        assertNull(triangle.findIntersections(new Ray(p12, v12)), "Ray's line crosses triangle");
     }
 
 }

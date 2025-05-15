@@ -6,6 +6,7 @@ import primitives.Vector;
 
 import java.util.List;
 
+import static java.lang.Math.abs;
 import static primitives.Util.isZero;
 
 /**
@@ -100,6 +101,24 @@ public class Polygon extends Geometry {
      */
     @Override
     public List<Point> findIntersections(Ray ray) {
-        return null;
+        // Check if the ray intersects with the plane
+        List<Point> intersections = plane.findIntersections(ray);
+        if (intersections == null) return null; // The ray is parallel to the plane
+        // Check if the intersection point is inside the polygon
+        for (Point intersection : intersections) {
+            Vector n1 = vertices.get(0).subtract(intersection);
+            Vector n2 = vertices.get((1) % size).subtract(intersection);
+            int flag = n1.crossProduct(n2).dotProduct(plane.getNormal(null)) > 0 ? 1 : -1;
+            for (int i = 1; i < size; ++i) {
+                if (intersection.equals(vertices))
+                    intersections.remove(intersection);// The intersection point is a vertex of the polygon
+                n1 = vertices.get(i).subtract(intersection);
+                n2 = vertices.get((i + 1) % size).subtract(intersection);
+                flag = n1.crossProduct(n2).dotProduct(plane.getNormal(null)) > 0 ? flag++ : flag--;
+            }
+            if (abs(flag) == size)
+                return List.of(intersection);// The intersection point is outside the polygon
+        }
+    return null;// The intersection point is inside the polygon}
     }
 }
