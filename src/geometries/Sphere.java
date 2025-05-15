@@ -6,6 +6,8 @@ import primitives.Vector;
 
 import java.util.List;
 
+import static primitives.Util.*;
+
 /**
  * class to represent a sphere in the 3D space
  */
@@ -39,6 +41,10 @@ public class Sphere extends RadialGeometry {
      */
     @Override
     public List<Point> findIntersections(Ray ray) {
+        if (ray.getHead().equals(center)) {
+            // The ray starts at the center of the sphere
+            return List.of(ray.getHead().add(ray.getDirection().scale(radius)));
+        }
         Vector u = center.subtract(ray.getHead());
         double tm=ray.getDirection().dotProduct(u);
         double d = Math.sqrt(u.lengthSquared() - tm * tm);
