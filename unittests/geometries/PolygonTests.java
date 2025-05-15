@@ -113,7 +113,18 @@ class PolygonTests {
         Vector v03 = new Vector(0, -2, 0);
         assertNull(polygon.findIntersections(new Ray(p03, v03)), "Ray's line crosses polygon");
 
-        //============= Boundary Values Tests ==================
+        //TC04: Ray starts before and crosses the polygon
+        Point p04 = new Point(0, 0, 0);
+        Vector v04 = new Vector(1, 1, 1);
+        Point expectedP1 = new Point(0.3,0.3,0.3);
+        assertEquals(1, polygon.findIntersections(new Ray(p04, v04)).size() , "Ray's line crosses polygon");
+
+        // TC05: Ray starts before and goes outside the polygon
+        Point p05 = new Point(0, 0, 0);
+        Vector v05 = new Vector(-1, -1, -1);
+        assertNull(polygon.findIntersections(new Ray(p05, v05)), "Ray's line crosses polygon");
+
+       //============= Boundary Values Tests ==================
         // TC10: Ray starts at the edge of the polygon
         Point p10 = new Point(1, 1, 0);
         Vector v10 = new Vector(1, 1, 0);

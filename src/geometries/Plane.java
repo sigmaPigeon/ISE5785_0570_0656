@@ -70,7 +70,7 @@ public class Plane extends Geometry {
      */
     @Override
     public List<Point> findIntersections(Ray ray) {
-        if (ray.getHead().equals(q)) return null; // The ray starts on the plane point
+        if(ray.getHead().equals(q)) return null;
         // Check if the ray intersects with the plane
         Vector n = normal;
         Vector v = ray.getDirection();
@@ -80,8 +80,8 @@ public class Plane extends Geometry {
         }
         // Calculate the intersection point
         double d = n.dotProduct(q.subtract(ray.getHead()));
-        if (isZero(d)) {
-            return null; // The ray is on the plane or starts inside it
+        if(isZero(d)) {
+            return null; // The ray is on the plane
         }
         double t1 = alignZero(d / nv);
         if (t1 < 0) {

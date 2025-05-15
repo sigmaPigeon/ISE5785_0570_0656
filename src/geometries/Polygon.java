@@ -119,7 +119,7 @@ public class Polygon extends Geometry {
             n2 = vertices.get((i + 1) % size).subtract(intersections.get(0));
             if(n1.dotProduct(n2) == 1 || n1.dotProduct(n2) == -1 || n1.equals(n2.scale(-1)))
                 return null; // The intersection point is on the edge of the polygon
-            flag = n1.crossProduct(n2).dotProduct(plane.getNormal()) > 0 ? flag++ : flag--;
+            flag = n1.crossProduct(n2).dotProduct(plane.getNormal()) > 0 ? ++flag : --flag;
         }
         if (abs(flag) == size) return List.of(intersections.get(0));
         // The intersection point is outside the polygon
