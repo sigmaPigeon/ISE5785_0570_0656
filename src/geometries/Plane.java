@@ -10,28 +10,32 @@ import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
 /**
- * class to represent a plane in the space
+ * Class to represent a plane in 3D space.
+ * A plane is defined by a point on the plane and a normal vector perpendicular to the plane.
  */
 public class Plane extends Geometry {
-    private final Point q;
-    private final Vector normal;
+    private final Point q; // A point on the plane
+    private final Vector normal; // The normal vector of the plane
 
     /**
-     * constructor to initialize a plane based on 3 points
-     * @param p1 first point
-     * @param p2 second point
-     * @param p3 third point
+     * Constructor to initialize a plane based on three points.
+     * The three points must not be collinear.
+     *
+     * @param p1 First point on the plane
+     * @param p2 Second point on the plane
+     * @param p3 Third point on the plane
      */
-    public Plane(Point p1,Point p2,Point p3){
+    public Plane(Point p1, Point p2, Point p3) {
         // Create a plane using 3 points
         normal = p2.subtract(p1).crossProduct(p3.subtract(p1)).normalize();
         q = p1;
     }
 
     /**
-     * Constructor to initialize a plane based on a point and a vector
-     * @param q point
-     * @param normal vector
+     * Constructor to initialize a plane based on a point and a normal vector.
+     *
+     * @param q     A point on the plane
+     * @param normal The normal vector of the plane
      */
     public Plane(Point q, Vector normal) {
         this.q = q;
@@ -39,11 +43,12 @@ public class Plane extends Geometry {
     }
 
     /**
-     * method to get a normal vector of a plane based on a point
-     * @param p1 the point we want the normal from
-     * @return the normal vector from the point
+     * Method to get the normal vector of the plane.
+     * The normal vector is constant for the entire plane.
+     *
+     * @param p1 A point on the plane (not used in this implementation)
+     * @return The normal vector of the plane
      */
-
     @Override
     public Vector getNormal(Point p1) {
         // If the normal is already defined, return it
@@ -56,12 +61,14 @@ public class Plane extends Geometry {
     }
 
     /**
-     * @param ray the ray to intersect with
-     * @return
+     * Method to find the intersection points of a ray with the plane.
+     *
+     * @param ray The ray to intersect with the plane
+     * @return A list containing the intersection point, or null if there are no intersections
      */
     @Override
     public List<Point> findIntersections(Ray ray) {
-        if(ray.getHead().equals(q)) return null; // The ray starts on the plane point
+        if (ray.getHead().equals(q)) return null; // The ray starts on the plane point
         // Check if the ray intersects with the plane
         Vector n = normal;
         Vector v = ray.getDirection();

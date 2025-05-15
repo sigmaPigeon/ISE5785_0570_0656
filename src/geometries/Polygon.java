@@ -96,8 +96,10 @@ public class Polygon extends Geometry {
 
 
     /**
+     * Find the intersection points of a ray with the polygon
+     *
      * @param ray the ray to intersect with
-     * @return
+     * @return list of intersection points or null if there are no intersections
      */
     @Override
     public List<Point> findIntersections(Ray ray) {
