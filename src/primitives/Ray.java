@@ -16,7 +16,7 @@ public class Ray {
      */
     public Ray(Point p, Vector v) {
         head = p;
-        direction = v;
+        direction = v.normalize();
     }
 
     /**

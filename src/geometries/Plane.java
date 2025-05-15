@@ -41,7 +41,9 @@ public class Plane extends Geometry {
         this.q = q;
         this.normal = normal.normalize();
     }
-
+    public Vector getNormal(){
+        return normal;
+    }
     /**
      * Method to get the normal vector of the plane.
      * The normal vector is constant for the entire plane.
@@ -85,7 +87,7 @@ public class Plane extends Geometry {
         if (t1 < 0) {
             return null; // The intersection point is behind the ray's head
         }
-        Point intersectionPoint = ray.getHead().add(v.scale(t1));
+        Point intersectionPoint = ray.getPoint(t1);
         return List.of(intersectionPoint);
     }
 }
