@@ -116,7 +116,6 @@ class PolygonTests {
         //TC04: Ray starts before and crosses the polygon
         Point p04 = new Point(0, 0, 0);
         Vector v04 = new Vector(1, 1, 1);
-        Point expectedP1 = new Point(0.3,0.3,0.3);
         assertEquals(1, polygon.findIntersections(new Ray(p04, v04)).size() , "Ray's line crosses polygon");
 
         // TC05: Ray starts before and goes outside the polygon
