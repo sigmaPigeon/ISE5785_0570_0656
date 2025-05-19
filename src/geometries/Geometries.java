@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Geometries implements Intersectable {
-    private List<Intersectable> geometries = new ArrayList<>();
+    private final List<Intersectable> geometries = new ArrayList<>();
 
     /**
      * Constructor to initialize the list of geometries.
