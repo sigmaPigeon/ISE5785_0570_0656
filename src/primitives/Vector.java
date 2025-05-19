@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Vector extends Point {
 
     public static Vector AXIS_X = new Vector(1, 0, 0);
-    public Vector AXIS_Y = new Vector(0, 1, 0);
+    public static Vector AXIS_Y = new Vector(0, 1, 0);
     public static Vector AXIS_Z = new Vector(0, 0, 1);
     /**
      * Constructs a Vector with the specified coordinates.
