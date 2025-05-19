@@ -99,7 +99,7 @@ public class Camera implements Cloneable
     public Ray constructRay(int nX, int nY, int j, int i){
         return null;
     }
-double getVpHeight() {
+    double getVpHeight() {
         return viewPlaneHeight;
     }
     double getVpWidth() {
