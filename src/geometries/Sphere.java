@@ -47,11 +47,13 @@ public class Sphere extends RadialGeometry {
         }
         Vector u = center.subtract(ray.getHead());
         if(u.normalize().equals(ray.getDirection())){
+            //check if the ray is inside the sphere and it directs to the center
             double d =  ray.getHead().distance(center);
             if(d <= radius)
                 return List.of(ray.getPoint(d+radius));
             return List.of(ray.getPoint(d-radius),ray.getPoint(d+radius));
         }
+        //according to the algorithm learned in class
         double tm=ray.getDirection().dotProduct(u);
         double d = Math.sqrt(u.lengthSquared() - tm * tm);
         double th = Math.sqrt(radius * radius - d * d);
