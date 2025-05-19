@@ -48,7 +48,7 @@ public class Sphere extends RadialGeometry {
         Vector u = center.subtract(ray.getHead());
         if(u.normalize().equals(ray.getDirection())){
             double d =  ray.getHead().distance(center);
-            if(d < radius)
+            if(d <= radius)
                 return List.of(ray.getPoint(d+radius));
             return List.of(ray.getPoint(d-radius),ray.getPoint(d+radius));
         }
