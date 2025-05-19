@@ -113,6 +113,8 @@ class SphereTest {
         assertNull(sphere.findIntersections(new Ray(new Point(2,1,0), new Vector(0,1,0))), "begin of ray does not count");
         // **** Group 4: Special cases
 
+        // TC41: Ray's line is outside sphere, ray is orthogonal to ray start to sphere's center line
+        //assertNull(sphere.findIntersections(new Ray(new Point(3,0,0), new Vector(0,1,0))), "begin of ray does not count");
 
         // TC42: Ray's starts inside, ray is orthogonal to ray start to sphere's center line
         final var result8 = sphere.findIntersections(new Ray(new Point(1.6,0,0), new Vector(0,0.8,0)));

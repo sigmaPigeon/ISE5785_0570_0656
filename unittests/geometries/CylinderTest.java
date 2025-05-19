@@ -87,4 +87,5 @@ class CylinderTest {
         assertEquals(expectedNormalOnTip2, cylinder.getNormal(pointOnTip2),
                 "Cylinder's normal at a point on its second base and the tip is not correct");
     }
+
 }

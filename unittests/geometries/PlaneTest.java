@@ -83,7 +83,7 @@ class PlaneTest {
         // Verify if one of the normal vectors is a unit vector
         assertEquals(expectedNormal1, plane.getNormal(new Point(0,0 ,0 )), "Plane normal is not correct");
     }
-     /*
+    /*
         * Test method for {@link geometries.Plane#findIntersections(primitives.Ray)}.
      */
     @Test

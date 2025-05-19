@@ -36,6 +36,15 @@ class TriangleTest {
         assertEquals(expectedNormal2, triangle.getNormal(pointOnSurface),
                 "Triangle's normal is not correct");
     }
+    @Test
+    void testFindintersections() {
+        // ============ Equivalence Partitions Tests ==============
+        // TC01: Ray's line is outside the triangle (0 points)
+        Triangle triangle = new Triangle(new Point(0, 0, 0), new Point(1, 0, 0), new Point(0, 1, 0));
+        Point p01 = new Point(-1, -1, 0);
+        Vector v110 = new Vector(1, 1, 0);
+        assertNull(triangle.findIntersections(new Ray(p01, v110)), "Ray's line out of triangle");
+    }
 
     @Test
     void testFindIntersection(){
