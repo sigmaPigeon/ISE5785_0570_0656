@@ -15,8 +15,8 @@ class GeometriesTest {
     void testFindIntersections() {
         //============ Equivalence Partitions Tests ==============
         // TC01: Test the intersection of some geometries with a ray(not all)
-        Triangle triangle011 = new Triangle(new Point(0, 0, 0), new Point(1, 0, 0), new Point(0, 1, 0));
-        Triangle triangle012 = new Triangle(new Point(0, 0, 1), new Point(1, 0, 1), new Point(0, 1, 1));
+        Triangle triangle011 = new Triangle(new Point(0, 0, 0), new Point(2, 0, 0), new Point(0, 2, 0));
+        Triangle triangle012 = new Triangle(new Point(0, 0, 2), new Point(2, 0, 2), new Point(0, 2, 2));
         Sphere sphere011 = new Sphere(new Point(1, 1, 1), 1);
         Sphere sphere012 = new Sphere(new Point(2, 8, 2), 1);
         Geometries geometries01 = new Geometries(triangle011, triangle012, sphere011, sphere012);
@@ -26,9 +26,11 @@ class GeometriesTest {
 
         //============== Boundary Values Tests ==================
         // TC10: Test the intersection of some geometries with a ray(all)
+        Triangle triangle101 = new Triangle(new Point (-1,-1,0),new Point(-1,3,0),new Point(3,-1,0));
+        Triangle triangle102 = new Triangle(new Point (0,0,1),new Point(0,4,1),new Point(4,0,1));
         Sphere sphere102 = new Sphere(new Point(2, 1, 2), 1);
-        Geometries geometries10 = new Geometries(triangle011, triangle012, sphere011, sphere102);//using the 3 geometries from earlier
-        Ray ray101 = new Ray(new Point(0.5, 0.5, -1), new Vector(0, 0, 1));
+        Geometries geometries10 = new Geometries(triangle101, triangle102, sphere011, sphere102);//using the 3 geometries from earlier
+        Ray ray101 = new Ray(new Point(-1, -1, -1), new Vector(1, 1, 1));
         List<Point> expectedIntersections10 = geometries10.findIntersections(ray101);
         assertEquals(6, expectedIntersections10.size(), "Wrong number of intersection points");
 
@@ -38,7 +40,7 @@ class GeometriesTest {
         assertNull(expectedIntersections11, "Expected no intersection points");
 
         // TC12: Test the intersection of some geometries with a ray(1)
-        Ray ray121 = new Ray(new Point(0.5, 0.5, 0.5), new Vector(0, 0, -1));
+        Ray ray121 = new Ray(new Point(0.1, 0.1, 0.5), new Vector(0, 0, -1));
         List<Point> expectedIntersections12 = geometries10.findIntersections(ray121);
         assertEquals(1, expectedIntersections12.size(), "Wrong number of intersection points");
 
