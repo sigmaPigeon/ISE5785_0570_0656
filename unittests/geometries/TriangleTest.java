@@ -45,7 +45,9 @@ class TriangleTest {
         Vector v110 = new Vector(1, 1, 0);
         assertNull(triangle.findIntersections(new Ray(p01, v110)), "Ray's line out of triangle");
     }
-
+    /*
+        * Test method for {@link geometries.Triangle#findIntersections(primitives.Ray)}.
+     */
     @Test
     void testFindIntersection(){
         // ============ Equivalence Partitions Tests ==============

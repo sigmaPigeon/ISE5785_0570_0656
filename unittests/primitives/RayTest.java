@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RayTest {
-
+/*
+    * Unit tests for {@link Ray#getPoint(double)}.
+ */
     @Test
     void testGetPoint() {
         //============== Equivalence Partitions Tests ==============
