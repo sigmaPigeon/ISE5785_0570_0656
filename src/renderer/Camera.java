@@ -63,6 +63,11 @@ public class Camera implements Cloneable
             return this;
         }
         public Builder setResolution(int nX, int nY){
+            if (nX <= 0 || nY <= 0) {
+                throw new IllegalArgumentException("Resolution must be positive");
+            }
+            this.camera.nX = nX;
+            this.camera.nY = nY;
             return this;
         }
         public Camera build(){
@@ -97,7 +102,17 @@ public class Camera implements Cloneable
     }
 
     public Ray constructRay(int nX, int nY, int j, int i){
-        return null;
+        Point pc = p0.add(vto.scale(distance));
+        Point pIJ = pc;
+        double xJ = (j - (nX - 1) / 2.0) * (viewPlaneWidth / nX);
+        double yI = -(i - (nY - 1) / 2.0) * (viewPlaneHeight / nY);
+        if (!isZero(xJ)) {
+            pIJ = pIJ.add(vright.scale(xJ));
+        }
+        if (!isZero(yI)) {
+            pIJ = pIJ.add(vup.scale(yI));
+        }
+        return new Ray(p0, pIJ.subtract(p0).normalize());
     }
     double getVpHeight() {
         return viewPlaneHeight;

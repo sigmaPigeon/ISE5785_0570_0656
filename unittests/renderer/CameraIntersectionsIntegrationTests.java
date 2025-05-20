@@ -13,18 +13,20 @@ public class CameraIntersectionsIntegrationTests {
     void CameraIntegrationSphereTest() {
         Camera camera1 = new Camera().getBuilder()
                 .setLocation(Point.ZERO)
-                .setDirection(new Point(0,0,-3))
+                .setDirection(new Point(0,0,-1))
                 .setVpSize(3,3)
+                .setResolution(3,3)
                 .setVpDistance(1)
                 .build();
 
         Sphere tc1=new Sphere (new Point(0,0,-3),1);
         check(2, findAllIntersections(camera1, tc1));
 
-        Sphere tc2=new Sphere (new Point(0,0,-2.5),2.5);
+
+        Sphere tc2=new Sphere (new Point(0,0,-3),2.5);
         check(18, findAllIntersections(camera1, tc2));
 
-        Sphere tc3=new Sphere (new Point(0,0,-2),2);
+        Sphere tc3=new Sphere (new Point(0,0,-2.5),2);
         check(10, findAllIntersections(camera1, tc3));
 
         Sphere tc4=new Sphere (new Point(0,0,-1),4);
@@ -39,6 +41,7 @@ public class CameraIntersectionsIntegrationTests {
                 .setLocation(Point.ZERO)
                 .setDirection(new Point(0,0,-3))
                 .setVpSize(3,3)
+                .setResolution(3,3)
                 .setVpDistance(1)
                 .build();
 
@@ -56,6 +59,7 @@ public class CameraIntersectionsIntegrationTests {
                 .setLocation(Point.ZERO)
                 .setDirection(new Point(0,0,-3))
                 .setVpSize(3,3)
+                .setResolution(3,3)
                 .setVpDistance(1)
                 .build();
 
@@ -73,7 +77,9 @@ public class CameraIntersectionsIntegrationTests {
             for (int i = 0; i < 3; i++) {
                 Ray ray = camera.constructRay(camera.getnX(),camera.getnY(),j, i);
                 List<Point> intersections = geometry.findIntersections(ray);
-                count += intersections.size();
+                if(intersections!= null) {
+                        count += intersections.size();
+                }
             }
         }
         return count;
