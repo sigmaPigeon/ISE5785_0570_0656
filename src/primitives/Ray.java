@@ -1,5 +1,7 @@
 package primitives;
 
+import java.util.List;
+
 import static primitives.Util.isZero;
 
 /**
@@ -70,5 +72,16 @@ public class Ray {
             return head;
         }
         return head.add(direction.scale(t));
+    }
+
+    /**
+     * Finds the closest point to the ray from a list of points.
+     * This method is a placeholder and should be implemented in subclasses.
+     *
+     * @param points the list of points to search
+     * @return the closest point to the ray, currently returns null since it's not implemented
+     */
+    public Point findClosestPoint(List<Point> points) {
+        return null;
     }
 }
