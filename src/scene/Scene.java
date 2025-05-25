@@ -23,16 +23,20 @@ public class Scene {
      * setter method to initialize the background color of the scene
      * @param color the background color of the scene
      */
-    public void setBackgroundColor(Color color){
+    public Scene setBackgroundColor(Color color){
+
         this.backgroundColor = color;
+        return this;
     }
 
     /**
      * setter method to initialize the intensity
      * @param intensity the intensity of the ambientlight
      */
-    public void setAmbientLight(Color intensity) {
+    public Scene setAmbientLight(Color intensity) {
+
         this.ambientLight = new AmbientLight(intensity);
+        return this;
     }
 
     /**

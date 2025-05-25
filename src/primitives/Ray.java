@@ -82,6 +82,19 @@ public class Ray {
      * @return the closest point to the ray, currently returns null since it's not implemented
      */
     public Point findClosestPoint(List<Point> points) {
-        return null;
+       if( points == null || points.isEmpty()) {
+            return null; // No points to compare
+        }
+        Point closestPoint = null;
+        double minDistance = Double.MAX_VALUE;
+
+        for (Point point : points) {
+            double distance = head.distance(point);
+            if (distance < minDistance) {
+                minDistance = distance;
+                closestPoint = point;
+            }
+        }
+        return closestPoint;
     }
 }

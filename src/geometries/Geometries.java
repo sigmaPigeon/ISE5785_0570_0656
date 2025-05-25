@@ -31,10 +31,12 @@ public class Geometries implements Intersectable {
     /**
      * Method to add a geometry to the list.
      *
-     * @param geometry the geometry to add
+     * @param geometries the geometries to add
      */
-    public void add(Intersectable geometry) {
-        this.geometries.add(geometry);
+    public void add(Intersectable... geometries) {
+        for (Intersectable geometry : geometries) {
+            this.geometries.add(geometry);
+        }
     }
 
     /**

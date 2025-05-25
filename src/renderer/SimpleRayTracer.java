@@ -1,0 +1,39 @@
+package renderer;
+
+import scene.Scene;
+import primitives.*;
+
+import java.util.List;
+
+public class SimpleRayTracer extends RayTracerBase {
+
+    /**
+     * Constructor for SimpleRayTracer.
+     * Initializes the ray tracer with the provided scene.
+     *
+     * @param scene The scene to be rendered
+     */
+    public SimpleRayTracer(Scene scene) {
+        super(scene);
+    }
+
+    /**
+     * Renders the scene using a simple ray tracing algorithm.
+     */
+    @Override
+    public Color traceRay(Ray ray){
+        // Find the closest intersection point of the ray with the scene
+        List<Point> intersections = scene.geometries.findIntersections(ray);
+        if (intersections==null || intersections.isEmpty()) {
+            // If there are no intersections, return the background color
+            return scene.backgroundColor;
+        }
+        // Get the closest intersection point
+        Point closestPoint = ray.findClosestPoint(intersections);
+        return calcColor(closestPoint);
+    }
+
+    Color calcColor(Point point){
+        return scene.ambientLight.getIntensity();
+    }
+}
