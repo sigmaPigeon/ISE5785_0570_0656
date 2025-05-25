@@ -3,7 +3,10 @@ package lighting;
 
 import primitives.Color;
 
+import static primitives.Color.BLACK;
+
 public class AmbientLight {
+    static public final Color NONE = BLACK;
     private final Color intensity;
 
     /**
