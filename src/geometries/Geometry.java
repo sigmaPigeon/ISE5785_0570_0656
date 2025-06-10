@@ -1,19 +1,26 @@
 package geometries;
 
-import primitives.Point;
-import primitives.Ray;
+import primitives.*;
 import primitives.Vector;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+
+import java.util.*;
+
 
 /**
  * Abstract class to represent a geometry object in 3D space.
  * This class defines a method to get the normal vector at a given point.
  */
-public abstract class Geometry implements Intersectable {
+public abstract class Geometry extends Intersectable {
+    protected Color emission = Color.BLACK;
 
     public abstract Vector getNormal(Point p);
+    Color getEmission() {
+        return emission;
+    }
+
+    public Geometry setEmission(Color emission) {
+        this.emission = emission;
+        return this;
+    }
 }
