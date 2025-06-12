@@ -102,19 +102,20 @@ public class Polygon extends Geometry {
      * @return list of intersection points or null if there are no intersections
      */
     @Override
-    public List<Point> findIntersections(Ray ray) {
+    public List<Intersection> calculateIntersectionsHelper(Ray ray) {
         // Check if the ray intersects with the plane
         List<Point> intersections = plane.findIntersections(ray);
         if (intersections == null) return null; // The ray is parallel to the plane
+        Point intersection = intersections.getFirst(); // Get the first intersection point
         // Check if the intersection point is inside the polygon
-        if (intersections.get(0).equals(vertices.get(0)) || intersections.get(0).equals(vertices.get(1)))
+        if (intersection.equals(vertices.get(0)) || intersection.equals(vertices.get(1)))
             return null; // The intersection point is a vertex of the polygon
         Vector v1 = vertices.get(0).subtract(ray.getHead());
         Vector v2 = vertices.get(1).subtract(ray.getHead());
         Vector n1 = v1.crossProduct(v2).normalize();
         int flag = n1.dotProduct(ray.getDirection()) > 0 ? 1 : -1;
         for (int i = 1; i < size; ++i) {
-            if (intersections.get(0).equals(vertices.get((i+1)%size)))
+            if (intersection.equals(vertices.get((i+1)%size)))
                 return null;// The intersection point is a vertex of the polygon
             v1 = vertices.get(i).subtract(ray.getHead());
             v2 = vertices.get((i + 1) % size).subtract(ray.getHead());
@@ -126,7 +127,7 @@ public class Polygon extends Geometry {
             if (n1.dotProduct(ray.getDirection()) == 0)
                 return null;
         }
-        if (abs(flag) == size) return List.of(intersections.get(0));
+        if (abs(flag) == size) return List.of(new Intersection(this,intersection));
         // The intersection point is outside the polygon
         return null;
     }

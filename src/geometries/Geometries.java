@@ -48,10 +48,10 @@ public class Geometries extends Intersectable {
         return this.geometries;
     }
 
-    public List<Point> findIntersections(Ray ray) { // in Geometries
-        List<Point> totalList = null;
+    public List<Intersection> calculateIntersectionsHelper(Ray ray) { // in Geometries
+        List<Intersection> totalList = null;
         for (Intersectable geometry : geometries) {
-            var list = geometry.findIntersections(ray);
+            var list = geometry.calculateIntersections(ray);
             if (list != null)
                 if (totalList == null)
                     totalList = new LinkedList<>(list);

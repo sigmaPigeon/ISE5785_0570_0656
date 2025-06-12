@@ -4,7 +4,7 @@ import scene.Scene;
 import primitives.*;
 
 import java.util.List;
-
+import geometries.Intersectable. Intersection;
 public class SimpleRayTracer extends RayTracerBase {
 
     /**
@@ -23,17 +23,17 @@ public class SimpleRayTracer extends RayTracerBase {
     @Override
     public Color traceRay(Ray ray){
         // Find the closest intersection point of the ray with the scene
-        List<Point> intersections = scene.geometries.findIntersections(ray);
+        List<Intersection> intersections = scene.geometries.calculateIntersections(ray);
         if (intersections==null || intersections.isEmpty()) {
             // If there are no intersections, return the background color
             return scene.backgroundColor;
         }
         // Get the closest intersection point
-        Point closestPoint = ray.findClosestPoint(intersections);
+        Intersection closestPoint = ray.findClosestIntersection(intersections);
         return calcColor(closestPoint);
     }
 
-    Color calcColor(Point point){
-        return scene.ambientLight.getIntensity();
-    }
-}
+    private Color calcColor(Intersection intersection) {
+        return scene
+                .ambientLight.getIntensity().scale(intersection.geometry.mat).add(gp.geometry.getEmission());
+    }}
