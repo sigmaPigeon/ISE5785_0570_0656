@@ -22,12 +22,7 @@ public class Triangle extends Polygon {
     @Override
     public List<Intersection> calculateIntersectionsHelper(Ray ray){
         // The intersection of a ray with a triangle is the same as the intersection of the ray with the polygon
-        List<Point> intersections= super.findIntersections(ray);
-        if (intersections == null || intersections.isEmpty()) {
-            return null; // No intersection found
-        }
-        Point tmp = intersections.getFirst();
-        return List.of(new Intersection(this, tmp)); // Return the intersection point wrapped in an Intersection object
+        return super.calculateIntersectionsHelper(ray);
     }
 }
 

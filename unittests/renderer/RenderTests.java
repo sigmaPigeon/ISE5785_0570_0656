@@ -57,7 +57,7 @@ public class RenderTests {
     */
    @Test
    public void renderMultiColorTest() {
-      Scene scene = new Scene("Multi color").setAmbientLight(new AmbientLight(new Color(51, 51, 51)));
+      Scene scene = new Scene("Multi color").setAmbientLight(new Color(51, 51, 51));
       scene.geometries //
          .add(// center
               new Sphere(new Point(0, 0, -100), 50),

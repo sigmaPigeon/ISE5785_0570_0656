@@ -15,7 +15,7 @@ public abstract class Geometry extends Intersectable {
     protected Color emission = Color.BLACK;
 
     public abstract Vector getNormal(Point p);
-    Color getEmission() {
+    public Color getEmission() {
         return emission;
     }
 
@@ -23,4 +23,6 @@ public abstract class Geometry extends Intersectable {
         this.emission = emission;
         return this;
     }
+
+
 }

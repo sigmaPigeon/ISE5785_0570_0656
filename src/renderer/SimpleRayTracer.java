@@ -21,10 +21,10 @@ public class SimpleRayTracer extends RayTracerBase {
      * Renders the scene using a simple ray tracing algorithm.
      */
     @Override
-    public Color traceRay(Ray ray){
+    public Color traceRay(Ray ray) {
         // Find the closest intersection point of the ray with the scene
         List<Intersection> intersections = scene.geometries.calculateIntersections(ray);
-        if (intersections==null || intersections.isEmpty()) {
+        if (intersections == null || intersections.isEmpty()) {
             // If there are no intersections, return the background color
             return scene.backgroundColor;
         }
@@ -34,6 +34,7 @@ public class SimpleRayTracer extends RayTracerBase {
     }
 
     private Color calcColor(Intersection intersection) {
-        return scene
-                .ambientLight.getIntensity().scale(intersection.geometry.mat).add(gp.geometry.getEmission());
-    }}
+        return scene.ambientLight.getIntensity()
+                .add(intersection.geometry.getEmission());
+    }
+}
