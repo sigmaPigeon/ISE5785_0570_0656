@@ -127,7 +127,7 @@ public class Polygon extends Geometry {
             if (n1.dotProduct(ray.getDirection()) == 0)
                 return null;
         }
-        if (abs(flag) == size) return List.of(new Intersection(this,intersection));
+        if (abs(flag) == size) return List.of(new Intersection(this,intersection, material));
         // The intersection point is outside the polygon
         return null;
     }

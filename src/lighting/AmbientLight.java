@@ -5,9 +5,8 @@ import primitives.Color;
 
 import static primitives.Color.BLACK;
 
-public class AmbientLight {
+public class AmbientLight extends Light {
     static public final Color NONE = BLACK;
-    private final Color intensity;
 
     /**
      * Constructor to initialize the ambient light with intensity and color.
@@ -15,15 +14,9 @@ public class AmbientLight {
      * @param intensity the intensity of the ambient light
      */
     public AmbientLight(Color intensity) {
-        this.intensity = intensity;
+        super(intensity);
     }
 
-    /**
-     * Method to get the intensity of the ambient light.
-     *
-     * @return the intensity of the ambient light
-     */
-    public Color getIntensity() {
-        return intensity;
-    }
+
+
 }

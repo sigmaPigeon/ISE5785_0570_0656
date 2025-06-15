@@ -43,16 +43,16 @@ public class Sphere extends RadialGeometry {
     public List<Intersection> calculateIntersectionsHelper(Ray ray) {
         if (ray.getHead().equals(center)) {
             // The ray starts at the center of the sphere
-            return List.of(new Intersection(this,ray.getPoint(radius)));
+            return List.of(new Intersection(this,ray.getPoint(radius),material));
         }
         Vector u = center.subtract(ray.getHead());
         if(u.normalize().equals(ray.getDirection())){
             //check if the ray is inside the sphere and it directs to the center
             double d =  ray.getHead().distance(center);
             if(d <= radius)
-                return List.of(new Intersection(this,ray.getPoint(d+radius)));
-            return List.of(new Intersection(this, ray.getPoint(d-radius))
-                    ,new Intersection(this, ray.getPoint(d+radius)));
+                return List.of(new Intersection(this,ray.getPoint(d+radius),material));
+            return List.of(new Intersection(this, ray.getPoint(d-radius),material)
+                    ,new Intersection(this, ray.getPoint(d+radius),material));
         }
         //according to the algorithm learned in class
         double tm=ray.getDirection().dotProduct(u);
@@ -64,12 +64,12 @@ public class Sphere extends RadialGeometry {
         double t1 = tm - th;
         double t2 = tm + th;
         if (t1 > 0 && t2 > 0) {
-            return List.of(new Intersection(this, ray.getPoint(t1)),
-                   new Intersection(this, ray.getPoint(t2)));
+            return List.of(new Intersection(this, ray.getPoint(t1),material),
+                   new Intersection(this, ray.getPoint(t2),material));
         } else if (t1 > 0) {
-            return List.of(new Intersection(this, ray.getPoint(t1)));
+            return List.of(new Intersection(this, ray.getPoint(t1),material));
         } else if (t2 > 0) {
-            return List.of(new Intersection(this,ray.getPoint(t2)));
+            return List.of(new Intersection(this,ray.getPoint(t2),material));
         } else {
             return null; // no intersection
         }

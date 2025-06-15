@@ -117,4 +117,31 @@ public class RenderTests {
          .printGrid(100, new Color(YELLOW)) //
          .writeToImage("xml render test");
    }
+   @Test
+   public void renderMultiColorNoGlareTest() {
+      Scene scene = new Scene("Multi color no glare").setAmbientLight(new Color(WHITE));
+      scene.geometries //
+              .add(// center
+                      new Sphere(new Point(0, 0, -100), 50).setMaterial(new Material().setkA(0.4)),//
+                      // up left
+                      new Triangle(new Point(-100, 0, -100), new Point(0, 100, -100), new Point(-100, 100, -100))
+                              .setMaterial(new Material().setkA(new Double3(0.9,0.8,0.2))),//
+                              //.setEmission(new Color(GREEN)),
+                      // down left
+                      new Triangle(new Point(-100, 0, -100), new Point(0, -100, -100), new Point(-100, -100, -100))
+                              .setMaterial(new Material().setkA(new Double3(0.8,0.1,0.6))), //
+                              //.setEmission(new Color(RED)),
+                      // down right
+                      new Triangle(new Point(100, 0, -100), new Point(0, -100, -100), new Point(100, -100, -100))
+                              .setMaterial(new Material().setkA(new Double3(1,1,1))));//
+                              //.setEmission(new Color(BLUE)));
+
+      camera //
+              .setRayTracer(scene, RayTracerType.SIMPLE) //
+              .setResolution(1000, 1000) //
+              .build() //
+              .renderImage() //
+              .printGrid(100, new Color(WHITE)) //
+              .writeToImage("color render test no glare");
+   }
 }

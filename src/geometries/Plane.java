@@ -88,6 +88,6 @@ public class Plane extends Geometry {
             return null; // The intersection point is behind the ray's head
         }
         Point intersectionPoint = ray.getPoint(t1);
-        return List.of(new Intersection(this,intersectionPoint));
+        return List.of(new Intersection(this,intersectionPoint,material));
     }
 }
