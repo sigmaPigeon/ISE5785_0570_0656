@@ -27,10 +27,7 @@ public abstract class Geometry extends Intersectable {
     public Material getMaterial() {
         return material;
     }
-    public Geometry setMaterial(Material material) {
-        this.material = material;
-        return this;
-    }
+
 
 
 }
