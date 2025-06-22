@@ -1,13 +1,13 @@
 package renderer;
 
-import static java.awt.Color.BLUE;
-
 import org.junit.jupiter.api.Test;
 
 import geometries.*;
 import lighting.*;
 import primitives.*;
 import scene.Scene;
+
+import static java.awt.Color.*;
 
 /**
  * Test rendering a basic image
@@ -138,11 +138,11 @@ class LightsTests {
     @Test
     void allTogetherSphere(){
         scene1.geometries.add(sphere);
-        scene1.lights.add(new DirectionalLight(new Color(255,0,255),new Vector(1,0.5,-0.6)));
-        scene1.lights.add(new PointLight(new Color(255,255,0),new Point(6, 60, 25)) //
+        scene1.lights.add(new DirectionalLight(new Color(600,50,40),new Vector(1,0.5,-0.6)));
+        scene1.lights.add(new PointLight(new Color(500,255,10),new Point(6, 60, 25)) //
                 .setKl(0.001).setKq(0.0001));
 
-        scene1.lights.add(new SpotLight(new Color(0,255,255),new Point(0,10,95),new Vector(1.5,1,-0.7)));
+        scene1.lights.add(new SpotLight(new Color(100,555,5),new Point(0,10,95),new Vector(1.5,1,-0.7)));
 
         camera1 //
                 .setResolution(500, 500) //
@@ -192,11 +192,11 @@ class LightsTests {
     @Test
     void allTogetherTriangles() {
         scene2.geometries.add(triangle1, triangle2);
-        scene2.lights.add(new DirectionalLight(new Color(255, 0, 255), new Vector(1, 1, -0.6)));
-        scene2.lights.add(new PointLight(new Color(255, 255, 0), new Point(6, 60, -25)) //
+        scene2.lights.add(new DirectionalLight(new Color(255, 0, 255), new Vector(1.5, 2, -0.6)));
+        scene2.lights.add(new PointLight(new Color(255, 255, 0), new Point(78, -10, -25)) //
                 .setKl(0.001).setKq(0.0001));
 
-        scene2.lights.add(new SpotLight(new Color(0, 255, 255), new Point(0, 110, -95), new Vector(1.5, 1, -0.7)));
+        scene2.lights.add(new SpotLight(new Color(0, 255, 255), new Point(15, 200, -95), new Vector(1.5, 1, -0.7)));
 
         camera2.setResolution(500, 500) //
                 .build() //

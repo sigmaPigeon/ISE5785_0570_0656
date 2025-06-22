@@ -125,15 +125,15 @@ public class RenderTests {
                       new Sphere(new Point(0, 0, -100), 50).setMaterial(new Material().setkA(0.4)),//
                       // up left
                       new Triangle(new Point(-100, 0, -100), new Point(0, 100, -100), new Point(-100, 100, -100))
-                              .setMaterial(new Material().setkA(new Double3(0.9,0.8,0.2))),//
+                              .setMaterial(new Material().setkA(new Double3(0,0.8,0))),//
                               //.setEmission(new Color(GREEN)),
                       // down left
                       new Triangle(new Point(-100, 0, -100), new Point(0, -100, -100), new Point(-100, -100, -100))
-                              .setMaterial(new Material().setkA(new Double3(0.8,0.1,0.6))), //
+                              .setMaterial(new Material().setkA(new Double3(0.8,0,0))), //
                               //.setEmission(new Color(RED)),
                       // down right
                       new Triangle(new Point(100, 0, -100), new Point(0, -100, -100), new Point(100, -100, -100))
-                              .setMaterial(new Material().setkA(new Double3(1,1,1))));//
+                              .setMaterial(new Material().setkA(new Double3(0,0,0.8))));//
                               //.setEmission(new Color(BLUE)));
 
       camera //

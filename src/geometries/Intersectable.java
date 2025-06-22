@@ -18,7 +18,7 @@ public abstract class Intersectable {
     public static class Intersection {
         public final Geometry geometry;
         public final Point point;
-        public final Material material;
+        public  Material material =new Material();
         public Vector direction;
         public Vector normal;
         public Double dxn;

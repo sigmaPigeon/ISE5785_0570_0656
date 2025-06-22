@@ -26,23 +26,31 @@ public class Cylinder extends Tube{
      * @return the normal vector based on the cylinder and the point
      */
     @Override
-    public Vector getNormal(Point point){
-        //if the point is on the top or bottom base of the cylinder
-        Vector v1 = new Vector(point.getXyz());
-        Vector v2 = new Vector(axis.getHead().getXyz());
-        if (v1.dotProduct(axis.getDirection()) == v2.dotProduct(axis.getDirection()) ||
-                v1.dotProduct(axis.getDirection()) == height + v2.dotProduct(axis.getDirection())) {
-            return axis.getDirection();
+    public Vector getNormal(Point point) {
+        // Cylinder axis
+        Ray axisRay = this.axis;
+        Vector axisDir = axisRay.getDirection();
+        Point axisBase = axisRay.getHead();
+
+        //check if the point equals the axis base
+        if (point.equals(axisBase)) {
+            return axisDir; // Normal at the base is opposite to the axis direction
         }
-        // The normal vector of a cylinder at a point is the vector from the axis to that point
-        Vector v = point.subtract(axis.getHead());
-        double t = axis.getDirection().dotProduct(v);
-        // If the point is on the axis, return the normalized vector
-        if (t == 0) {
-            return v.normalize();
+        // Project point onto axis to find its position along the axis
+        Vector p0_p = point.subtract(axisBase);
+        double t = axisDir.dotProduct(p0_p);
+
+        // Check if point is on the bottom cap
+        if (t <= 0) {
+           // return axisDir.scale(-1).normalize();
+            return axisDir;
         }
-        // If the point is not on the axis, find the projection of the point onto the axis
-        Point o = axis.getHead().add(axis.getDirection().scale(t));
+        // Check if point is on the top cap
+        if (t >= height) {
+            return axisDir;
+        }
+        // Point is on the curved surface
+        Point o = axisBase.add(axisDir.scale(t));
         return point.subtract(o).normalize();
     }
 }

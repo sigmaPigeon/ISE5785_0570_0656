@@ -11,8 +11,8 @@ import geometries.Intersectable.Intersection;
  * class to represent a ray in the space
  */
 public class Ray {
-    protected final Point head;
-    protected final Vector direction;
+    private final Point head;
+    private final Vector direction;
 
     /**
      * Constructor to initialize ray based on head point and direction vector
@@ -86,12 +86,14 @@ public class Ray {
      */
     public Point findClosestPoint(List<Point> points) {
         return points == null ? null
-                : findClosestIntersection(points.stream().map(p -> new Intersection(null, p,new Material())).toList()).point;
+                : findClosestIntersection(points.stream()
+                .map(p -> new Intersection(null, p,new Material()))
+                .toList()).point;
     }
 
 
     public Intersection findClosestIntersection(List<Intersection> intersections) {
-        if (intersections == null || intersections.isEmpty()) {
+        if (intersections == null)  {
             return null; // No intersections to compare
         }
         Intersection closestIntersection = null;

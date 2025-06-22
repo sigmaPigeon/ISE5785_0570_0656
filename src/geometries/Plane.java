@@ -26,6 +26,10 @@ public class Plane extends Geometry {
      * @param p3 Third point on the plane
      */
     public Plane(Point p1, Point p2, Point p3) {
+        //check that the points are not collinear
+        if (p1.equals(p2) || p1.equals(p3) || p2.equals(p3)) {
+            throw new IllegalArgumentException("Points must be distinct");
+        }
         // Create a plane using 3 points
         normal = p2.subtract(p1).crossProduct(p3.subtract(p1)).normalize();
         q = p1;
@@ -41,9 +45,7 @@ public class Plane extends Geometry {
         this.q = q;
         this.normal = normal.normalize();
     }
-    public Vector getNormal(){
-        return normal;
-    }
+
     /**
      * Method to get the normal vector of the plane.
      * The normal vector is constant for the entire plane.
@@ -52,14 +54,8 @@ public class Plane extends Geometry {
      * @return The normal vector of the plane
      */
     @Override
-    public Vector getNormal(Point p1) {
-        // If the normal is already defined, return it
-        if (normal != null) {
-            return normal;
-        }
-        Vector v1 = p1.subtract(q);
-        Vector v2 = p1.subtract(q);
-        return v1.crossProduct(v2).normalize();
+    public Vector getNormal(Point unused) {
+       return normal;
     }
 
     /**
