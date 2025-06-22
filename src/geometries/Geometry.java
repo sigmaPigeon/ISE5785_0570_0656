@@ -31,7 +31,8 @@ public abstract class Geometry extends Intersectable {
         this.material = material;
         return this;
     }
-    dgf
+
+    
 
 
 }
