@@ -3,23 +3,32 @@ package lighting;
 import primitives.*;
 
 /**
- * The SpotLight class represents a point light source with a specific direction,
- * creating a cone-shaped beam of light.
- * Extends {@link PointLight} and adds directionality to the light's intensity.
+ * Represents a spotlight, which is a point light source with a specific direction,
+ * creating a cone-shaped beam of light. The intensity at a point depends on the
+ * direction and the narrowness of the beam.
+ * <p>
+ * Extends {@link PointLight} and adds directionality and beam control.
+ * </p>
  */
 public class SpotLight extends PointLight {
 
     /**
-     * The direction of the spotlight beam.
+     * The normalized direction vector of the spotlight beam.
      */
     private final Vector direction;
 
     /**
-     * Constructor to initialize the spot light with intensity, position, and direction.
+     * Controls the narrowness of the spotlight beam.
+     * Higher values produce a narrower, more focused beam.
+     */
+    private double narrowBeam = 1.0;
+
+    /**
+     * Constructs a new SpotLight with the given intensity, position, and direction.
      *
-     * @param intensity the intensity of the light
+     * @param intensity the color intensity of the light
      * @param position  the position of the light source
-     * @param direction the direction of the light beam
+     * @param direction the direction vector of the spotlight beam
      */
     public SpotLight(Color intensity, Point position, Vector direction) {
         super(intensity, position);
@@ -28,14 +37,28 @@ public class SpotLight extends PointLight {
 
     /**
      * Calculates the intensity of the spotlight at a given point,
-     * considering the direction of the beam.
+     * considering the direction and narrowness of the beam.
      *
      * @param p the point to calculate the intensity at
      * @return the color intensity at the given point
      */
     @Override
     public Color getIntensity(Point p) {
-        return super.getIntensity(p).scale(Math.max(0, direction.dotProduct(super.getL(p))));
+        double projection = Math.max(0, direction.dotProduct(super.getL(p)));
+        double factor = Math.pow(projection, narrowBeam);
+        return super.getIntensity(p).scale(factor);
+    }
+
+    /**
+     * Sets the narrowness of the spotlight beam.
+     * Higher values make the beam narrower and more focused.
+     *
+     * @param narrowBeam the narrowness factor (must be >= 1)
+     * @return this SpotLight instance (for chaining)
+     */
+    public SpotLight setNarrowBeam(double narrowBeam) {
+        this.narrowBeam = narrowBeam;
+        return this;
     }
 
     /**

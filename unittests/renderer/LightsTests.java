@@ -229,6 +229,54 @@ class LightsTests {
                 .renderImage() //
                 .writeToImage("lightTrianglesSpotSharp");
     }
+    @Test
+    void trianglesSpotBonus1() {
+        scene2.geometries.add(triangle1, triangle2);
+        scene2.lights.add(new SpotLight(trianglesLightColor, trianglesLightPosition, trianglesLightDirection) //
+                    .setNarrowBeam(10).setKl(0.001).setKq(0.0001));
+
+        camera2.setResolution(500, 500) //
+                .build() //
+                .renderImage() //
+                .writeToImage("lightTrianglesSpotBonus");
+    }
+    @Test
+    void trianglesSpotBonus2() {
+        scene2.geometries.add(triangle1, triangle2);
+        scene2.lights.add(new SpotLight(trianglesLightColor, trianglesLightPosition, trianglesLightDirection) //
+                .setNarrowBeam(2.5).setKl(0.001).setKq(0.0001));
+
+        camera2.setResolution(500, 500) //
+                .build() //
+                .renderImage() //
+                .writeToImage("lightTrianglesSpotBonus");
+    }
+
+
+    @Test
+    void sphereSpotBonus1() {
+        scene1.geometries.add(sphere);
+        scene1.lights.add(new SpotLight(sphereLightColor, sphereLightPosition, sphereLightDirection) //
+                .setNarrowBeam(10).setKl(0.001).setKq(0.0001));
+
+        camera1 //
+                .setResolution(500, 500) //
+                .build() //
+                .renderImage() //
+                .writeToImage("lightSphereSpotBonus");
+    }
+    @Test
+    void sphereSpotBonus2() {
+        scene1.geometries.add(sphere);
+        scene1.lights.add(new SpotLight(sphereLightColor, sphereLightPosition, sphereLightDirection) //
+                .setNarrowBeam(2.5).setKl(0.001).setKq(0.0001));
+
+        camera1 //
+                .setResolution(500, 500) //
+                .build() //
+                .renderImage() //
+                .writeToImage("lightSphereSpotBonus");
+    }
 
 
 

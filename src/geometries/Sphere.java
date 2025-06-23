@@ -37,31 +37,41 @@ public class Sphere extends RadialGeometry {
 
     /**
      * @param ray the ray to intersect with
-     * @return a list of intersections with the sphere, or null if there are no intersections
+     * @return
      */
     @Override
     public List<Intersection> calculateIntersectionsHelper(Ray ray) {
-        Vector L = center.subtract(ray.getHead());
-        double tca = ray.getDirection().dotProduct(L);
-        double d2 = L.lengthSquared() - tca * tca;
-        double r2 = radius * radius;
-
-        if (d2 > r2) {
-            return null; // No intersection
+        if (ray.getHead().equals(center)) {
+            // The ray starts at the center of the sphere
+            return List.of(new Intersection(this,ray.getPoint(radius)));
         }
-
-        double thc = Math.sqrt(r2 - d2);
-        double t1 = tca - thc;
-        double t2 = tca + thc;
-
-        List<Intersection> intersections = new java.util.ArrayList<>();
-        if (t1 > 0) {
-            intersections.add(new Intersection(this, ray.getPoint(t1), material));
+        Vector u = center.subtract(ray.getHead());
+        if(u.normalize().equals(ray.getDirection())){
+            //check if the ray is inside the sphere and it directs to the center
+            double d =  ray.getHead().distance(center);
+            if(d <= radius)
+                return List.of(new Intersection(this,ray.getPoint(d+radius)));
+            return List.of(new Intersection(this, ray.getPoint(d-radius))
+                    ,new Intersection(this, ray.getPoint(d+radius)));
         }
-        if (t2 > 0 && t2 != t1) {
-            intersections.add(new Intersection(this, ray.getPoint(t2), material));
+        //according to the algorithm learned in class
+        double tm=ray.getDirection().dotProduct(u);
+        double d = Math.sqrt(u.lengthSquared() - tm * tm);
+        double th = Math.sqrt(radius * radius - d * d);
+        if (d >= radius) {
+            return null; // no intersection
         }
-
-        return intersections.isEmpty() ? null : intersections;
+        double t1 = tm - th;
+        double t2 = tm + th;
+        if (t1 > 0 && t2 > 0) {
+            return List.of(new Intersection(this, ray.getPoint(t1)),
+                   new Intersection(this, ray.getPoint(t2)));
+        } else if (t1 > 0) {
+            return List.of(new Intersection(this, ray.getPoint(t1)));
+        } else if (t2 > 0) {
+            return List.of(new Intersection(this,ray.getPoint(t2)));
+        } else {
+            return null; // no intersection
+        }
     }
 }

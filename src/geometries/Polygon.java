@@ -112,8 +112,10 @@ public class Polygon extends Geometry {
             return null; // The intersection point is a vertex of the polygon
         Vector v1 = vertices.get(0).subtract(ray.getHead());
         Vector v2 = vertices.get(1).subtract(ray.getHead());
+        // Calculate the normal vector of the polygon using the first two edges
         Vector n1 = v1.crossProduct(v2).normalize();
         int flag = n1.dotProduct(ray.getDirection()) > 0 ? 1 : -1;
+        //
         for (int i = 1; i < size; ++i) {
             if (intersection.equals(vertices.get((i+1)%size)))
                 return null;// The intersection point is a vertex of the polygon
@@ -127,7 +129,7 @@ public class Polygon extends Geometry {
             if (n1.dotProduct(ray.getDirection()) == 0)
                 return null;
         }
-        if (abs(flag) == size) return List.of(new Intersection(this,intersection, material));
+        if (abs(flag) == size) return List.of(new Intersection(this,intersection));
         // The intersection point is outside the polygon
         return null;
     }
