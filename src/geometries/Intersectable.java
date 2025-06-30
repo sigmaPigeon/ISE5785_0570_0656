@@ -26,7 +26,7 @@ public abstract class Intersectable {
         /**
          * The material at the intersection point.
          */
-        public final Material material = new Material();
+        public final Material material;
         /**
          * The direction of the incoming ray at the intersection.
          */
@@ -68,6 +68,7 @@ public abstract class Intersectable {
         public Intersection(Geometry geometry, Point point) {
             this.geometry = geometry;
             this.point = point;
+            this.material = geometry == null ? null : geometry.getMaterial();
         }
 
         /**
