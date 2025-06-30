@@ -12,6 +12,9 @@ import geometries.Intersectable.Intersection;
  * Rays are used for geometric calculations such as intersections with objects.
  */
 public class Ray {
+    // Constants for ray tracing calculations
+    private static final double DELTA = 0.1;
+
     /**
      * The starting point (origin) of the ray.
      */
@@ -33,6 +36,18 @@ public class Ray {
         direction = v.normalize();
     }
 
+    /**
+     * Constructs an offset ray to avoid self-intersection issues.
+     * This is useful in ray tracing to ensure the ray does not intersect with its own geometry.
+     *
+     * @param normal the normal vector at the intersection point
+     * @return a new Ray that is offset from the original ray
+     */
+    public Ray(Point head, Vector direction,Vector normal) {
+        Vector delta = normal.scale(normal.dotProduct(direction) > 0 ? DELTA : -DELTA);
+        this.head = head.add(delta);// Small offset
+        this.direction = direction.normalize();
+    }
     /**
      * Compares this ray to another object for equality.
      * Two rays are equal if their head points and direction vectors are equal.
@@ -132,4 +147,5 @@ public class Ray {
         }
         return closestIntersection;
     }
+
 }
