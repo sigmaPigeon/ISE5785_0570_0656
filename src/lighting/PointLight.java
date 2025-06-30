@@ -63,6 +63,11 @@ public class PointLight extends Light implements LightSource {
         return position.subtract(p).normalize().scale(-1);
     }
 
+    @Override
+    public double getDistance(Point p) {
+        return position.distance(p);
+    }
+
     /**
      * Sets the constant attenuation factor.
      *

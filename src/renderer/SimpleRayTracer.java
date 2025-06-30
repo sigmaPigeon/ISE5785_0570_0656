@@ -7,6 +7,7 @@ import primitives.*;
 import java.util.List;
 import geometries.Intersectable. Intersection;
 
+import static primitives.Point.ZERO;
 import static primitives.Util.*;
 
 /**
@@ -14,6 +15,8 @@ import static primitives.Util.*;
  * Calculates color at intersection points using ambient, diffusive, and specular lighting.
  */
 public class SimpleRayTracer extends RayTracerBase {
+    // Constants for ray tracing calculations
+    private static final double DELTA = 0.1;
 
     /**
      * Constructor for SimpleRayTracer.
@@ -24,6 +27,36 @@ public class SimpleRayTracer extends RayTracerBase {
     public SimpleRayTracer(Scene scene) {
         super(scene);
     }
+
+    /**
+     * Checks if the intersection point is unshaded by any geometry.
+     * This method is used to determine if the intersection point is in shadow.
+     *
+     * @param intersection The intersection data
+     * @return True if the intersection point is unshaded, false otherwise
+     */
+    private boolean unshaded(Intersection intersection) {
+        Vector pointToLight = intersection.lightDirection.scale(-1);
+        Vector epsVector = intersection.normal.scale(intersection.ldxn < 0 ? DELTA : -DELTA);
+        Point point = intersection.point.add(epsVector);// from point to light source
+        Ray shadowRay = new Ray(point, pointToLight);
+        var shadowIntersections = scene.geometries.findIntersections(shadowRay);
+        double lightDistance = intersection.lightSource.getDistance(intersection.point);
+        if (shadowIntersections == null) {
+            // No intersections with other geometries, the point is unshaded
+            return true;
+        }
+        for (Point shadowIntersection : shadowIntersections) {
+            // Check if the intersection point is closer than the light source
+            if (shadowIntersection.distance(intersection.point) < lightDistance) {
+                return false; // The point is in shadow
+            }
+        }
+        return true; // The point is not in shadow
+    }
+
+
+
 
     /**
      * Traces a ray through the scene and returns the color at the closest intersection point.
@@ -107,13 +140,13 @@ public class SimpleRayTracer extends RayTracerBase {
         Material material= intersection.geometry.getMaterial();
         Color color =intersection.geometry.getEmission();
         for(LightSource lightSource:scene.lights){
-            if(!setLightSource(intersection, lightSource)) {
-                continue;// Skip if the light source is parallel to the normal
+            if(setLightSource(intersection, lightSource) && unshaded(intersection)) {
+                color = color.add(
+                        lightSource.getIntensity(intersection.point)
+                                .scale(calcDiffusive(intersection)
+                                        .add(calcSpecular(intersection))));
             }
-            color = color.add(
-                    lightSource.getIntensity(intersection.point)
-                            .scale(calcDiffusive(intersection)
-                                    .add(calcSpecular(intersection))));
+
         }
         return color;
 
