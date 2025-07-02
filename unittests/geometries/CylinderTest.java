@@ -6,6 +6,8 @@ import primitives.Ray;
 import primitives.Vector;
 
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -86,6 +88,30 @@ class CylinderTest {
         Vector expectedNormalOnTip2 = new Vector(1, 0, 0);
         assertEquals(expectedNormalOnTip2, cylinder.getNormal(pointOnTip2),
                 "Cylinder's normal at a point on its second base and the tip is not correct");
+    }
+
+
+    @Test
+    void testCylinderIntersections() {
+        // Cylinder along Z axis, radius 1, height 2, offset from origin
+        Cylinder cylinder = new Cylinder(new Ray(new Point(2, 2, 2), new Vector(0, 0, 1)), 1, 2);
+
+        // TC01: Ray intersects the curved surface at two points (not parallel or perpendicular to axis)
+        Ray ray1 = new Ray(new Point(4, 3, 3), new Vector(-1, -0.5, 0.5));
+        List<Intersectable.Intersection> intersections1 = cylinder.calculateIntersectionsHelper(ray1);
+        assertNotNull(intersections1, "Expected intersections");
+        assertTrue(intersections1.size() >= 1, "Cylinder: Should have at least 1 intersection");
+
+        // TC02: Ray intersects the top cap (not through the center)
+        Ray ray2 = new Ray(new Point(2.5, 2, 5), new Vector(0, 0.5, -1));
+        List<Intersectable.Intersection> intersections2 = cylinder.calculateIntersectionsHelper(ray2);
+        assertNotNull(intersections2, "Expected intersection with cap");
+        assertTrue(intersections2.size() >= 1, "Cylinder: Should have at least 1 intersection with cap");
+
+        // TC03: Ray misses the cylinder completely
+        Ray ray3 = new Ray(new Point(10, 10, 10), new Vector(1, 1, 1));
+        List<Intersectable.Intersection> intersections3 = cylinder.calculateIntersectionsHelper(ray3);
+        assertNull(intersections3, "Expected no intersection");
     }
 
 }

@@ -5,6 +5,8 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 /**
  * Unit tests for {@link geometries.Tube#getNormal(Point)}.
@@ -48,4 +50,21 @@ class TubeTest {
     }
 
 
+    @Test
+    void testTubeIntersections() {
+        // Tube along Z axis, radius 1, shifted from origin
+        Tube tube = new Tube(new Ray(new Point(1, 1, 1), new Vector(0, 0, 1)), 1);
+
+        // ============ Equivalence Partitions Tests ==============
+        // TC01: Ray intersects the tube at two points
+        Ray ray1 = new Ray(new Point(3, 1, 2), new Vector(-1, 0, 0.5));
+        List<Intersectable.Intersection> intersections1 = tube.calculateIntersectionsHelper(ray1);
+        assertNotNull(intersections1, "Expected intersections");
+        assertEquals(2, intersections1.size(), "Tube: Wrong number of intersections");
+
+        // TC02: Ray intersects the tube at one point (tangent)
+        Ray ray2 = new Ray(new Point(5, 5, 5), new Vector(1, 1, 1));
+        List<Intersectable.Intersection> intersections2 = tube.calculateIntersectionsHelper(ray2);
+        assertNull(intersections2, "Expected no intersection");
+    }
 }
