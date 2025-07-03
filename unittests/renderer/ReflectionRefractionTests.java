@@ -182,7 +182,21 @@ class ReflectionRefractionTests {
               new Plane(new Point(0, -30, 0), new Vector(0, 1, 0))
                       .setEmission(new Color(15, 15, 15))
                       .setMaterial(new Material().setkR(0.5).setkD(0.5)),
-              new Polygon(new Point(-20, -30, -20), new Point(-20, -30, 20), new Point(-20, 10, 20), new Point(-20, 10, -20))
+              new Plane(new Point(0, 70, 0), new Vector(0, 1, 0))
+                      .setEmission(new Color(15, 15, 15))
+                      .setMaterial(new Material().setkR(0.5).setkD(0.5)),
+// Back wall (YZ plane), moved further back to z = -120
+              new Plane(new Point(0, -100, -150), new Vector(0, 0, 1))
+                      .setEmission(new Color(30, 20, 40)) // Purplish
+                      .setMaterial(new Material().setkD(0.7).setkS(0.2).setkR(0.1)),
+// Right wall (XZ plane), moved further right to x = 60
+              new Plane(new Point(-70, -100, 0), new Vector(-1, 0, 0))
+                      .setEmission(new Color(20, 40, 30)) // Greenish
+                      .setMaterial(new Material().setkD(0.7).setkS(0.2).setkR(0.1)),
+              new Polygon(new Point(-50, -20, -149), new Point(40, -20, -149), new Point(40, 60, -149), new Point(-50, 60, -149))
+                      .setEmission(new Color(10, 10, 10)) // Nearly black, so only reflection is visible
+                      .setMaterial(new Material().setkR(1.0)),
+      new Polygon(new Point(-20, -30, -20), new Point(-20, -30, 20), new Point(-20, 10, 20), new Point(-20, 10, -20))
                       .setEmission(new Color(30, 10, 40))
                       .setMaterial(new Material().setkR(0.3).setkD(0.7)),
               new Polygon(new Point(20, -30, -20), new Point(20, -30, 20), new Point(20, 10, 20), new Point(20, 10, -20))
@@ -190,11 +204,8 @@ class ReflectionRefractionTests {
                       .setMaterial(new Material().setkR(0.3).setkD(0.7)),
               new Sphere(new Point(0, 20, 30), 7d)
                       .setEmission(new Color(30, 30, 30))
-                      .setMaterial(new Material().setkD(0.2).setkS(0.8).setnSh(300).setkT(0.7)),
-              new Cylinder(new Ray(new Point(0, -30, -40), new Vector(0, 1, 1).normalize()), 5, 40)
-                      .setEmission(new Color(20, 20, 20))
-                      .setMaterial(new Material().setkD(0.5).setkS(0.5).setnSh(80))
-      );
+                      .setMaterial(new Material().setkD(0.2).setkS(0.8).setnSh(300).setkT(0.7))
+              );
 // Move pyramid further to the left (x - 20)
       Point p1 = new Point(-60, -30, -100);
       Point p2 = new Point(-20, -30, -100);
@@ -245,8 +256,8 @@ class ReflectionRefractionTests {
       // Camera setup
 
       cameraBuilder
-              .setLocation(new Point(0, 40, 200))
-              .setDirection(new Point(1, 0, 0), new Vector(0, 1, 0)) // Look along +X, up is +Y
+              .setLocation(new Point(40, -20, 240)) // Slightly to the right
+              .setDirection(new Point(0, 10, 0), new Vector(0, 1, 0)) // Look toward the center
               .setVpDistance(400)
               .setVpSize(200, 200)
               .setResolution(800, 800)
