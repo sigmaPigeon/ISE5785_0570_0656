@@ -84,6 +84,8 @@ public class Cylinder extends Tube{
         if (!isZero(denom)) {
             double t = va.dotProduct(base.subtract(ray.getHead())) / denom;
             if (t > 0) {
+                if (isZero(t))
+                    return null; // The ray starts at the base, no intersection
                 Point p = ray.getPoint(t);
                 if (p.equals(top) || p.subtract(base).lengthSquared() <= radius * radius)
                     result.add(new Intersection(this, p));
@@ -94,6 +96,8 @@ public class Cylinder extends Tube{
         if (!isZero(denom)) {
             double t = va.dotProduct(top.subtract(ray.getHead())) / denom;
             if (t > 0) {
+                if ( isZero(t))
+                    return null; // The ray starts at the top, no intersection
                 Point p = ray.getPoint(t);
                 if (p.equals(top) || p.subtract(top).lengthSquared() <= radius * radius)
                     result.add(new Intersection(this, p));

@@ -62,6 +62,10 @@ public class Tube extends RadialGeometry{
         }
         Vector deltaP = p0.subtract(pa);
         double vVa = v.dotProduct(va);
+        if (isZero(vVa)) {
+            // If the ray is parallel to the tube's axis, return null
+            return null;
+        }
         Vector vMinusVa = v.subtract(va.scale(vVa));
         double a = vMinusVa.lengthSquared();
 
