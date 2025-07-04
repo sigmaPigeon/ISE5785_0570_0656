@@ -91,7 +91,7 @@ public class Polygon extends Geometry {
 
     @Override
     public Vector getNormal(Point point) {
-        return plane.getNormal(point);
+        return plane.getNormal(null);
     }
 
 

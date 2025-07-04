@@ -46,7 +46,7 @@ public class Vector extends Point {
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (!(obj instanceof Vector vec)) return false;
-        return Objects.equals(this.xyz, vec.xyz);
+        return xyz.equals(vec.xyz);
     }
 
     /**
@@ -89,8 +89,13 @@ public class Vector extends Point {
      * @throws IllegalArgumentException if the vectors are parallel
      */
     public Vector crossProduct(Vector v) {
-        double a1 = xyz.d1(), a2 = xyz.d2(), a3 = xyz.d3();
-        double b1 = v.xyz.d1(), b2 = v.xyz.d2(), b3 = v.xyz.d3();
+        double a1 = xyz.d1();
+        double a2 = xyz.d2();
+        double a3 = xyz.d3();
+
+        double b1 = v.xyz.d1();
+        double b2 = v.xyz.d2();
+        double b3 = v.xyz.d3();
 
         double c1 = a2 * b3 - a3 * b2;
         double c2 = a3 * b1 - a1 * b3;

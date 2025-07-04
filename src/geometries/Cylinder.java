@@ -56,10 +56,10 @@ public class Cylinder extends Tube{
      * @param ray the ray to intersect with
      * @return list of intersection points or null if there are no intersections
      */
-   @Override
-   public List<Intersection> calculateIntersectionsHelper(Ray ray) {
-       if (height <= 0)
-           throw new IllegalArgumentException("Height must be greater than zero");
+    @Override
+    public List<Intersection> calculateIntersectionsHelper(Ray ray) {
+        if (height <= 0)
+            throw new IllegalArgumentException("Height must be greater than zero");
         List<Intersection> tubeIntersections = super.calculateIntersectionsHelper(ray);
         List<Intersection> result = new java.util.ArrayList<>();// Filter tube intersections to be within the cylinder's height
         if (tubeIntersections != null) {
@@ -79,7 +79,7 @@ public class Cylinder extends Tube{
         Vector va = axis.getDirection();
         Point base = axis.getHead();
         Point top = base.add(va.scale(height));
-            // Bottom cap
+        // Bottom cap
         double denom = va.dotProduct(ray.getDirection());
         if (!isZero(denom)) {
             double t = va.dotProduct(base.subtract(ray.getHead())) / denom;

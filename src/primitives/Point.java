@@ -16,9 +16,7 @@ public class Point {
      */
     protected final Double3 xyz;
 
-    public Double3 getXyz() {
-        return xyz;
-    }
+
 
     /**
      * Constructs a Point with the specified coordinates.
@@ -110,5 +108,9 @@ public class Point {
      */
     public double distance(Point point) {
         return Math.sqrt(distanceSquared(point));
+    }
+
+    public Double3 getXyz() {
+        return xyz;
     }
 }
