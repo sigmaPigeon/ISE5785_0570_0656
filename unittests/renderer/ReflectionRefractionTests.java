@@ -251,7 +251,7 @@ class ReflectionRefractionTests {
       );
 
       // Lower ambient light
-      scene.setAmbientLight(new AmbientLight(new Color(8, 8, 8)).getIntensity());
+      scene.setAmbientLight(new AmbientLight(new Color(30, 30, 30)).getIntensity());
 
       // Camera setup
 
@@ -261,7 +261,10 @@ class ReflectionRefractionTests {
               .setVpDistance(400)
               .setVpSize(200, 200)
               .setResolution(800, 800)
+              .setMultithreading(4) // Use 4 threads for rendering
               .build()
               .renderImage()
-              .writeToImage("complexSceneWithManyGeometriesAndLights"); }
+              .writeToImage("complexSceneWithManyGeometriesAndLights")
+
+      ; }
 }
