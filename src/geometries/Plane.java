@@ -50,7 +50,7 @@ public class Plane extends Geometry {
      * Method to get the normal vector of the plane.
      * The normal vector is constant for the entire plane.
      *
-     * @param p1 A point on the plane (not used in this implementation)
+     * @param unused A point on the plane (not used in this implementation)
      * @return The normal vector of the plane
      */
     @Override
@@ -85,5 +85,17 @@ public class Plane extends Geometry {
         }
         Point intersectionPoint = ray.getPoint(t1);
         return List.of(new Intersection(this,intersectionPoint));
+    }
+
+    /**
+     * Method to compute the bounding box of the plane.
+     * Since a plane extends infinitely, it does not have a finite bounding box.
+     */
+    @Override
+    public void computeBoundingBox() {
+        // A plane does not have a finite bounding box, so this method does nothing.
+        // In practice, we might define a bounding box for rendering purposes,
+        // but for geometric calculations, the plane is infinite.
+        box = null; // No bounding box for an infinite plane
     }
 }

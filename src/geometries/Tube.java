@@ -91,4 +91,9 @@ public class Tube extends RadialGeometry{
         if (t2 > 0 && !isZero(t2 - t1)) result.add(new Intersection(this, ray.getPoint(t2)));
         return result.isEmpty() ? null : result;
     }
+    @Override
+    public void computeBoundingBox() {
+        // Tube is infinite; no finite bounding box.
+        box = null;
+    }
 }

@@ -60,4 +60,27 @@ public class Geometries extends Intersectable {
         }
         return totalList;
     }
+
+    @Override
+    public void computeBoundingBox() {
+        if (geometries.isEmpty()) return;
+        geometries.forEach(Intersectable::computeBoundingBox);
+
+        double minX = Double.POSITIVE_INFINITY, minY = Double.POSITIVE_INFINITY, minZ = Double.POSITIVE_INFINITY;
+        double maxX = Double.NEGATIVE_INFINITY, maxY = Double.NEGATIVE_INFINITY, maxZ = Double.NEGATIVE_INFINITY;
+
+        for (Intersectable g : geometries) {
+            AABB box = g.box;
+            if (box == null) continue;
+            Point min = box., max = box.max;
+            if (min.getX() < minX) minX = min.getX();
+            if (min.getY() < minY) minY = min.getY();
+            if (min.getZ() < minZ) minZ = min.getZ();
+            if (max.getX() > maxX) maxX = max.getX();
+            if (max.getY() > maxY) maxY = max.getY();
+            if (max.getZ() > maxZ) maxZ = max.getZ();
+        }
+        box = new AABB(new Point(minX, minY, minZ), new Point(maxX, maxY, maxZ));
+
+    }
 }

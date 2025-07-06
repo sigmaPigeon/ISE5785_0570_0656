@@ -48,6 +48,7 @@ public class Camera implements Cloneable {
     /**
      * Builder class for constructing a Camera object step by step.
      */
+
     public static class Builder {
         final Camera camera; // The camera instance being built
 
@@ -199,6 +200,14 @@ public class Camera implements Cloneable {
         public Builder setDebugPrint(double interval) {
             if (interval < 0) throw new IllegalArgumentException("interval parameter must be non-negative");
             camera.printInterval = interval;
+            return this;
+        }
+        public Builder enableCBR(){
+
+            return this;
+        }
+        public Builder enableBVH() {
+
             return this;
         }
 
@@ -365,7 +374,9 @@ public class Camera implements Cloneable {
         return this;
     }
     void castRay(int x, int y) {
+
         Ray ray = constructRay(nX, nY, x, y);
+
         Color color = traceRay.traceRay(ray);
         imageWriter.writePixel(x, y, color);
         pixelManager.pixelDone();

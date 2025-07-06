@@ -14,6 +14,61 @@ public abstract class Intersectable {
      * Class to represent an intersection between a ray and a geometry.
      * Stores the geometry, intersection point, material, and additional intersection details.
      */
+    public class AABB{
+        public final Point min;
+        public final Point max;
+
+        public AABB(Point min, Point max) {
+            this.min = min;
+            this.max = max;
+
+            }
+        }
+    public boolean intersects(Ray ray) {
+
+        if (!bvhIsOn || box == null)
+            return true;
+        Vector dir = ray.getDirection();
+        Point p0 = ray.getHead();
+        double tmin = (box.min.getX() - p0.getX()) / dir.getX();
+        double tmax = (box.max.getX() - p0.getX()) / dir.getX();
+        if (tmin > tmax) {
+            double temp = tmin;
+            tmin = tmax;
+            tmax = temp;
+        }
+        double tymin = (box.min.getY() - p0.getY()) / dir.getY();
+        double tymax = (box.max.getY() - p0.getY()) / dir.getY();
+        if (tymin > tymax) {
+            double temp = tymin;
+            tymin = tymax;
+            tymax = temp;
+        }
+        if ((tmin > tymax) || (tymin > tmax))
+            return false;
+        if (tymin > tmin)
+            tmin = tymin;
+        if (tymax < tmax)
+            tmax = tymax;
+        double tzmin = (box.min.getZ() - p0.getZ()) / dir.getZ();
+        double tzmax = (box.max.getZ() - p0.getZ()) / dir.getZ();
+        if (tzmin > tzmax) {
+            double temp = tzmin;
+            tzmin = tzmax;
+            tzmax = temp;
+        }
+        if ((tmin > tzmax) || (tzmin > tmax))
+            return false;
+        if (tzmin > tmin)
+            tmin = tzmin;
+        if (tzmax < tmax)
+            tmax = tzmax;
+        return true;
+    }
+    protected AABB box=new AABB(new Point(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY),
+            new Point(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY));
+
+    protected boolean bvhIsOn = false;
     public static class Intersection {
         /**
          * The geometry that was intersected.
@@ -104,6 +159,9 @@ public abstract class Intersectable {
      * @return a list of intersection points, or null if none
      */
     public final List<Point> findIntersections(Ray ray) {
+        if (bvhIsOn&& !intersects(ray)) {
+            return null; // No intersection if bounding box check fails
+        }
         List<Intersection> list = calculateIntersections(ray);
         return list == null ? null : list.stream().map(intersection -> intersection.point).toList();
     }
@@ -124,4 +182,9 @@ public abstract class Intersectable {
     public final List<Intersection> calculateIntersections(Ray ray) {
         return  calculateIntersectionsHelper(ray);
     }
+    /**
+     * Returns the bounding box of the geometry.
+     * @return the bounding box
+     */
+    public abstract void computeBoundingBox();
 }

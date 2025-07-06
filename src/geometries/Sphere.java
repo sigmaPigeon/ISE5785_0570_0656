@@ -74,4 +74,13 @@ public class Sphere extends RadialGeometry {
             return null; // no intersection
         }
     }
+    @Override
+    public void computeBoundingBox() {
+
+        Point rad = new Point(radius,radius,radius);
+        // The bounding box of a sphere is a cube with side length equal to the diameter of the sphere
+       box= new AABB(
+               center.subtract(rad),center.add(new Vector(rad.getXyz()))
+        );
+    }
 }
