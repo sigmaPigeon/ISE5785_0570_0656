@@ -2,6 +2,8 @@ package lighting;
 
 import primitives.*;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * Represents a spotlight, which is a point light source with a specific direction,
  * creating a cone-shaped beam of light. The intensity at a point depends on the
@@ -11,11 +13,10 @@ import primitives.*;
  * </p>
  */
 public class SpotLight extends PointLight {
-
     /**
      * The normalized direction vector of the spotlight beam.
      */
-    private final Vector direction;
+    protected final Vector direction;
 
     /**
      * Controls the narrowness of the spotlight beam.
@@ -92,5 +93,16 @@ public class SpotLight extends PointLight {
     public SpotLight setKq(double kQ) {
         super.setKq(kQ);
         return this;
+    }
+    /**
+     * Returns a random point on the surface of the spotlight's position.
+     * This method can be overridden if the spotlight has a specific surface area.
+     *
+     * @return the position of the spotlight
+     */
+    @Override
+    public Point getRandomPointOnSurface() {
+        // For a spotlight, we can return the position as the surface point
+        return super.getRandomPointOnSurface();
     }
 }

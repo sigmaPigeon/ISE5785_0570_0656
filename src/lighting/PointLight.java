@@ -38,6 +38,10 @@ public class PointLight extends Light implements LightSource {
         this.position = position;
     }
 
+    public Point getPosition() {
+        return position;
+    }
+
     /**
      * Calculates the intensity of the light at a given point,
      * considering distance attenuation.
@@ -100,4 +104,5 @@ public class PointLight extends Light implements LightSource {
         this.kQ = kQ;
         return this;
     }
+
 }

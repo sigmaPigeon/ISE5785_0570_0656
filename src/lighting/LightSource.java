@@ -29,4 +29,14 @@ public interface LightSource {
      * @return the distance to the point
      */
     double getDistance(Point p);
+
+    /**
+     * Returns the radius of the light source.
+     *
+     * @return the radius of the light source
+     */
+    default Point getRandomPointOnSurface() {
+        return null; // Default implementation returns null, can be overridden by subclasses
+    }
+
 }

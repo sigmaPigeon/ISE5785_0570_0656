@@ -1,14 +1,15 @@
 package renderer;
 
 import lighting.LightSource;
+import renderer.SoftShadowsUtil;
 import scene.Scene;
 import primitives.*;
 
 import java.util.List;
 import geometries.Intersectable.Intersection;
 
-import static primitives.Point.ZERO;
 import static primitives.Util.*;
+import static renderer.SoftShadowsUtil.generateBeamToArea;
 
 /**
  * Implements a simple ray tracing algorithm for rendering a 3D scene.
@@ -18,6 +19,14 @@ public class SimpleRayTracer extends RayTracerBase {
     private static final int MAX_CALC_COLOR_LEVEL = 10;
     private static final double MIN_CALC_COLOR_K = 0.001;
     private static final Double3 INITIAL_K = Double3.ONE;
+    // Number of samples for soft shadows MP1
+    private static int NUM_SAMPLES = 200;
+    // Flag to enable soft shadows MP1
+    private boolean softShadowsEnabled = false;
+
+    public void setSoftShadows(boolean enabled) {
+        this.softShadowsEnabled = enabled;
+    }
 
     /**
      * Constructor for SimpleRayTracer.
@@ -81,6 +90,46 @@ public class SimpleRayTracer extends RayTracerBase {
         }
         return ktr; // The point is not in shadow
     }
+
+    /**
+     * Calculates the transparency factor (ktr) for the intersection point using soft shadows.
+     * This method samples multiple directions to simulate soft shadows.
+     *
+     * @param intersection The intersection data
+     * @param numSamples The number of samples to take for soft shadow calculation
+     * @return The average transparency factor as Double3
+     */
+    private Double3 softTransparency(Intersection intersection, int numSamples) {
+        if (intersection.point == null) {
+            return Double3.ZERO; // No intersection point, return zero transparency
+        }
+        if(intersection.lightSource.getRandomPointOnSurface() == null) {
+            // If the light source does not have a surface, use the standard transparency calculation
+            return transparency(intersection);
+        }
+        List<Vector> beam = generateBeamToArea(intersection.lightSource, intersection.point, numSamples);
+        Double3 ktrSum = Double3.ZERO;
+
+        for (Vector dir : beam) {
+            Ray shadowRay = new Ray(intersection.point, dir, intersection.normal);
+            var intersections = scene.geometries.calculateIntersections(shadowRay);
+            Double3 ktr = Double3.ONE;
+
+            if (intersections != null) {
+                for (Intersection shadowIntersection : intersections) {
+                    double lightDistance = intersection.lightSource.getDistance(intersection.point);
+                    if (shadowIntersection.point.distance(intersection.point) < lightDistance) {
+                        ktr = ktr.product(shadowIntersection.material.kT);
+                        if (ktr.lowerThan(MIN_CALC_COLOR_K)) break;
+                    }
+                }
+            }
+            ktrSum = ktrSum.add(ktr);
+        }
+
+        return ktrSum.reduce(beam.size()); // average the transparency factor over all samples
+    }
+
 
     /**
      * Finds the closest intersection point of a ray with the scene geometries.
@@ -246,7 +295,7 @@ public class SimpleRayTracer extends RayTracerBase {
         Color color = intersection.geometry.getEmission();
         for (LightSource lightSource : scene.lights) {
             if (setLightSource(intersection, lightSource)) {
-                Double3 ktr = transparency(intersection);
+                Double3 ktr = softShadowsEnabled ? softTransparency(intersection, NUM_SAMPLES) : transparency(intersection);
                 if (ktr.product(k).lowerThan(MIN_CALC_COLOR_K)) {
                     continue; // The point is in shadow
                 }
