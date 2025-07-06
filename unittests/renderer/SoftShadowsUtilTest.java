@@ -18,6 +18,9 @@ class SoftShadowsUtilTest {
     private final Camera.Builder cameraBuilder = Camera.getBuilder()     //
             .setRayTracer(scene, RayTracerType.SIMPLE);
 
+    /**
+     * Test for complex scene with many geometries and lights.
+     */
     @Test
     void complexSceneWithManyGeometriesAndLights() {
         // Add 10 geometries with much darker emission
@@ -115,7 +118,11 @@ class SoftShadowsUtilTest {
                 .renderImage()
                 .writeToImage("complexSceneWithManyGeometriesAndLights"); }
 
-
+    /**
+     * Test for complex scene with many geometries and lights using multithreading.
+     * This test is similar to the previous one but uses more threads for rendering.
+     * as well as testing soft shadows.
+     */
     @Test
     void complexSceneWithManyGeometriesAndLightsMP1() {
         // Add 10 geometries with much darker emission

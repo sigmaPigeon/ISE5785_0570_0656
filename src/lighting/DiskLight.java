@@ -9,7 +9,11 @@ import java.util.concurrent.ThreadLocalRandom;
 import static primitives.Vector.AXIS_Y;
 import static primitives.Vector.AXIS_Z;
 
-public class DiskLight extends SpotLight{
+/**
+ * DiskLight represents a spotlight with a disk-shaped area for soft shadow effects.
+ * The light emits from a disk surface, allowing for more realistic soft shadows.
+ */
+public class DiskLight extends SpotLight {
     private final double radius;
 
     /**
@@ -25,10 +29,21 @@ public class DiskLight extends SpotLight{
         this.radius = radius;
     }
 
+    /**
+     * Returns the radius of the disk light.
+     *
+     * @return the disk radius
+     */
     public double getRadius() {
         return radius;
     }
 
+    /**
+     * Returns a random point on the surface of the disk for soft shadow sampling.
+     * If the radius is zero or direction is not set, returns the light's position.
+     *
+     * @return a random point on the disk surface
+     */
     @Override
     public Point getRandomPointOnSurface() {
         if (radius == 0 || super.direction == null)
@@ -44,7 +59,6 @@ public class DiskLight extends SpotLight{
         vUp = vUp.normalize();
         Vector vRight = dir.crossProduct(vUp).normalize();
 
-
         double r = radius * Math.sqrt(ThreadLocalRandom.current().nextDouble());
         double theta = 2 * Math.PI * ThreadLocalRandom.current().nextDouble();
 
@@ -55,5 +69,4 @@ public class DiskLight extends SpotLight{
                 .add(vRight.scale(x))
                 .add(vUp.scale(y));
     }
-
 }
