@@ -26,6 +26,12 @@ public abstract class Intersectable {
 
             }
         }
+
+    /**
+     * Checks if a ray intersects with the bounding box of the geometry.
+     * @param ray the ray to check for intersection
+     * @return true if the ray intersects the bounding box, false otherwise
+     */
     public boolean intersects(Ray ray) {
 
         if (!bvhIsOn || box == null)

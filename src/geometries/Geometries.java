@@ -62,7 +62,12 @@ public class Geometries extends Intersectable {
         }
         return totalList;
     }
-
+    /**
+     * Method to check if a ray intersects with any of the geometries.
+     *
+     * @param ray the ray to check for intersections
+     * @return true if the ray intersects with any geometry, false otherwise
+     */
     @Override
     public void computeBoundingBox() {
         if (geometries.isEmpty()) return;
@@ -85,7 +90,10 @@ public class Geometries extends Intersectable {
         box = new AABB(new Point(minX, minY, minZ), new Point(maxX, maxY, maxZ));
 
     }
-
+    /**
+     * Method to create a hierarchy of geometries for efficient intersection calculations.
+     * This method recursively pairs geometries and computes their bounding boxes until only one geometry remains.
+     */
     public void createHierarchy() {
         if (geometries.size()==1) {
             geometries.getFirst().computeBoundingBox();
