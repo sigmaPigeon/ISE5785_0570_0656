@@ -7,8 +7,7 @@ import java.util.LinkedList;
 import java.util.MissingResourceException;
 import java.util.stream.IntStream;
 
-import static java.awt.Color.RED;
-import static java.awt.Color.YELLOW;
+
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 /**
@@ -48,7 +47,6 @@ public class Camera implements Cloneable {
     /**
      * Builder class for constructing a Camera object step by step.
      */
-    private boolean isCBR = false;
 
     public static class Builder {
         final Camera camera; // The camera instance being built
@@ -204,7 +202,6 @@ public class Camera implements Cloneable {
             return this;
         }
         public Builder enableCBR(){
-            camera.isCBR = true;
             camera.traceRay.enableCBR();
             return this;
         }

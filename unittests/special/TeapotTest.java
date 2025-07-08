@@ -40,7 +40,7 @@ class TeapotTest {
      * 10 Teapot tests with CBR
      */
     @Test
-    @Disabled
+
 
     void testTeapot2() {
         for (int i = 1; i > 0; --i) {
@@ -62,6 +62,7 @@ class TeapotTest {
     /**
      * Teapot with CBR
      */
+
     void teapot2() {
         prepareTeapot() //
                 .enableCBR() //

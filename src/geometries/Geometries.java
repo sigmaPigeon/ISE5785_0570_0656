@@ -48,7 +48,9 @@ public class Geometries extends Intersectable {
         return this.geometries;
     }
 
-    public List<Intersection> calculateIntersectionsHelper(Ray ray) { // in Geometries
+    public List<Intersection> calculateIntersectionsHelper(Ray ray) {
+        if(bvhIsOn&&!intersects(ray))
+            return null;// in Geometries
         List<Intersection> totalList = null;
         for (Intersectable geometry : geometries) {
             var list = geometry.calculateIntersections(ray);
@@ -64,7 +66,7 @@ public class Geometries extends Intersectable {
     @Override
     public void computeBoundingBox() {
         if (geometries.isEmpty()) return;
-        geometries.forEach(Intersectable::computeBoundingBox);
+        geometries.forEach(Intersectable::initializebox);
         bvhIsOn=true;
         double minX = Double.POSITIVE_INFINITY, minY = Double.POSITIVE_INFINITY, minZ = Double.POSITIVE_INFINITY;
         double maxX = Double.NEGATIVE_INFINITY, maxY = Double.NEGATIVE_INFINITY, maxZ = Double.NEGATIVE_INFINITY;
