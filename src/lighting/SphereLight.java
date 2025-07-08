@@ -29,15 +29,6 @@ public class SphereLight extends PointLight {
     }
 
     /**
-     * Returns the radius of the sphere light.
-     *
-     * @return the sphere radius
-     */
-    public double getRadius() {
-        return radius;
-    }
-
-    /**
      * Returns a random point on the surface of the sphere for soft shadow sampling.
      * If the radius is zero, returns the light's position.
      *

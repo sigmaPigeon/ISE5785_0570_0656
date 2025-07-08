@@ -30,15 +30,6 @@ public class DiskLight extends SpotLight {
     }
 
     /**
-     * Returns the radius of the disk light.
-     *
-     * @return the disk radius
-     */
-    public double getRadius() {
-        return radius;
-    }
-
-    /**
      * Returns a random point on the surface of the disk for soft shadow sampling.
      * If the radius is zero or direction is not set, returns the light's position.
      *
