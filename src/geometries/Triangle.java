@@ -26,6 +26,7 @@ public class Triangle extends Polygon {
     }
     @Override
     public void computeBoundingBox() {
+        bvhIsOn= true;
         double minX = vertices.get(0).getX(), maxX = vertices.get(0).getX();
         double minY = vertices.get(0).getY(), maxY = vertices.get(0).getY();
         double minZ = vertices.get(0).getZ(), maxZ = vertices.get(0).getZ();

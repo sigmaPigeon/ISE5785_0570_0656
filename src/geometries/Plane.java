@@ -93,6 +93,7 @@ public class Plane extends Geometry {
      */
     @Override
     public void computeBoundingBox() {
+        bvhIsOn=true;
         // A plane does not have a finite bounding box, so this method does nothing.
         // In practice, we might define a bounding box for rendering purposes,
         // but for geometric calculations, the plane is infinite.

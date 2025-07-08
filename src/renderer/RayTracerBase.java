@@ -24,5 +24,11 @@ public abstract class RayTracerBase {
      * @return the color at the intersection point, or black if no intersection occurs
      */
      public abstract Color traceRay(Ray ray);
+    public void enableCBR(){
+        scene.geometries.computeBoundingBox();
+    }
 
+    public void createHierarchy() {
+        scene.geometries.createHierarchy();
+    }
 }

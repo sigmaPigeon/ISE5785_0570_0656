@@ -17,19 +17,19 @@ import scene.Scene;
  * Test rendering an image
  * @author Dan Zilberstein
  */
-class TeapotTest {
+class TeapotTest2 {
     /** Default constructor to satisfy JavaDoc generator */
-    TeapotTest() { /* to satisfy JavaDoc generator */ }
+    TeapotTest2() { /* to satisfy JavaDoc generator */ }
 
     /**
      * Teapot without improvements
      */
     @Test
-    @Disabled
+
 
     void testTeapot1() {
         prepareTeapot() //
-                .setMultithreading(0)
+                .setMultithreading(-1)
                 .build() //
                 .renderImage() //
                 .printGrid(50, new Color(YELLOW)) //
@@ -40,7 +40,6 @@ class TeapotTest {
      * 10 Teapot tests with CBR
      */
     @Test
-    @Disabled
 
     void testTeapot2() {
         for (int i = 1; i > 0; --i) {
@@ -52,9 +51,9 @@ class TeapotTest {
      * 100 Teapot tests with BVH
      */
     @Test
-
+    @Disabled
     void testTeapot3() {
-        for (int i = 1; i > 0; --i) {
+        for (int i = 100; i > 0; --i) {
             teapot3();
         }
     }
@@ -78,7 +77,6 @@ class TeapotTest {
     void teapot3() {
         prepareTeapot() //
                 .enableBVH() //
-                .setMultithreading(-1)
                 .build() //
                 .renderImage() //
                 .printGrid(50, new Color(YELLOW)) //
@@ -666,7 +664,7 @@ class TeapotTest {
      * @param scene the scene data container
      */
     private void addTeapotToScene(Scene scene) {
-        scene.geometries.add(
+        Geometries part1=new Geometries(//
                 new Triangle(points[7], points[6], points[1]).setEmission(color).setMaterial(material), //
                 new Triangle(points[1], points[2], points[7]).setEmission(color).setMaterial(material), //
                 new Triangle(points[8], points[7], points[2]).setEmission(color).setMaterial(material), //
@@ -682,7 +680,8 @@ class TeapotTest {
                 new Triangle(points[14], points[13], points[8]).setEmission(color).setMaterial(material), //
                 new Triangle(points[8], points[9], points[14]).setEmission(color).setMaterial(material), //
                 new Triangle(points[15], points[14], points[9]).setEmission(color).setMaterial(material), //
-                new Triangle(points[9], points[10], points[15]).setEmission(color).setMaterial(material),
+                new Triangle(points[9], points[10], points[15]).setEmission(color).setMaterial(material));
+        Geometries part2=new Geometries(
                 new Triangle(points[17], points[16], points[11]).setEmission(color).setMaterial(material), //
                 new Triangle(points[11], points[12], points[17]).setEmission(color).setMaterial(material), //
                 new Triangle(points[18], points[17], points[12]).setEmission(color).setMaterial(material), //
@@ -700,7 +699,8 @@ class TeapotTest {
                 new Triangle(points[25], points[24], points[19]).setEmission(color).setMaterial(material), //
                 new Triangle(points[19], points[20], points[25]).setEmission(color).setMaterial(material), //
                 new Triangle(points[27], points[26], points[21]).setEmission(color).setMaterial(material), //
-                new Triangle(points[21], points[22], points[27]).setEmission(color).setMaterial(material),
+                new Triangle(points[21], points[22], points[27]).setEmission(color).setMaterial(material));
+        Geometries part3=new Geometries(
                 new Triangle(points[28], points[27], points[22]).setEmission(color).setMaterial(material), //
                 new Triangle(points[22], points[23], points[28]).setEmission(color).setMaterial(material), //
                 new Triangle(points[29], points[28], points[23]).setEmission(color).setMaterial(material), //
@@ -719,7 +719,8 @@ class TeapotTest {
                 new Triangle(points[31], points[32], points[37]).setEmission(color).setMaterial(material), //
                 new Triangle(points[38], points[37], points[32]).setEmission(color).setMaterial(material), //
                 new Triangle(points[32], points[33], points[38]).setEmission(color).setMaterial(material), //
-                new Triangle(points[39], points[38], points[33]).setEmission(color).setMaterial(material), //
+                new Triangle(points[39], points[38], points[33]).setEmission(color).setMaterial(material));
+        Geometries part4=new Geometries(
                 new Triangle(points[33], points[34], points[39]).setEmission(color).setMaterial(material), //
                 new Triangle(points[40], points[39], points[34]).setEmission(color).setMaterial(material), //
                 new Triangle(points[34], points[35], points[40]).setEmission(color).setMaterial(material), //
@@ -749,7 +750,8 @@ class TeapotTest {
                 new Triangle(points[49], points[50], points[55]).setEmission(color).setMaterial(material), //
                 new Triangle(points[57], points[56], points[51]).setEmission(color).setMaterial(material), //
                 new Triangle(points[51], points[52], points[57]).setEmission(color).setMaterial(material), //
-                new Triangle(points[58], points[57], points[52]).setEmission(color).setMaterial(material), //
+                new Triangle(points[58], points[57], points[52]).setEmission(color).setMaterial(material));
+        Geometries part5=new Geometries(
                 new Triangle(points[52], points[53], points[58]).setEmission(color).setMaterial(material), //
                 new Triangle(points[59], points[58], points[53]).setEmission(color).setMaterial(material), //
                 new Triangle(points[53], points[54], points[59]).setEmission(color).setMaterial(material), //
@@ -775,7 +777,8 @@ class TeapotTest {
                 new Triangle(points[66], points[67], points[72]).setEmission(color).setMaterial(material), //
                 new Triangle(points[73], points[72], points[67]).setEmission(color).setMaterial(material), //
                 new Triangle(points[67], points[68], points[73]).setEmission(color).setMaterial(material), //
-                new Triangle(points[74], points[73], points[68]).setEmission(color).setMaterial(material), //
+                new Triangle(points[74], points[73], points[68]).setEmission(color).setMaterial(material));
+        Geometries part6=new Geometries(
                 new Triangle(points[68], points[69], points[74]).setEmission(color).setMaterial(material), //
                 new Triangle(points[75], points[74], points[69]).setEmission(color).setMaterial(material), //
                 new Triangle(points[69], points[70], points[75]).setEmission(color).setMaterial(material), //
@@ -804,7 +807,8 @@ class TeapotTest {
                 new Triangle(points[88], points[87], points[83]).setEmission(color).setMaterial(material), //
                 new Triangle(points[83], points[84], points[88]).setEmission(color).setMaterial(material), //
                 new Triangle(points[89], points[15], points[10]).setEmission(color).setMaterial(material), //
-                new Triangle(points[10], points[85], points[89]).setEmission(color).setMaterial(material), //
+                new Triangle(points[10], points[85], points[89]).setEmission(color).setMaterial(material));
+        Geometries part7=new Geometries(
                 new Triangle(points[90], points[89], points[85]).setEmission(color).setMaterial(material), //
                 new Triangle(points[85], points[86], points[90]).setEmission(color).setMaterial(material), //
                 new Triangle(points[91], points[90], points[86]).setEmission(color).setMaterial(material), //
@@ -824,7 +828,8 @@ class TeapotTest {
                 new Triangle(points[98], points[97], points[93]).setEmission(color).setMaterial(material), //
                 new Triangle(points[93], points[94], points[98]).setEmission(color).setMaterial(material), //
                 new Triangle(points[99], points[98], points[94]).setEmission(color).setMaterial(material), //
-                new Triangle(points[94], points[95], points[99]).setEmission(color).setMaterial(material), //
+                new Triangle(points[94], points[95], points[99]).setEmission(color).setMaterial(material));
+        Geometries part8=new Geometries(
                 new Triangle(points[100], points[99], points[95]).setEmission(color).setMaterial(material), //
                 new Triangle(points[95], points[96], points[100]).setEmission(color).setMaterial(material), //
                 new Triangle(points[101], points[30], points[25]).setEmission(color).setMaterial(material), //
@@ -851,7 +856,8 @@ class TeapotTest {
                 new Triangle(points[106], points[107], points[111]).setEmission(color).setMaterial(material), //
                 new Triangle(points[112], points[111], points[107]).setEmission(color).setMaterial(material), //
                 new Triangle(points[107], points[108], points[112]).setEmission(color).setMaterial(material), //
-                new Triangle(points[113], points[45], points[40]).setEmission(color).setMaterial(material), //
+                new Triangle(points[113], points[45], points[40]).setEmission(color).setMaterial(material));
+        Geometries part9=new Geometries(
                 new Triangle(points[40], points[109], points[113]).setEmission(color).setMaterial(material), //
                 new Triangle(points[114], points[113], points[109]).setEmission(color).setMaterial(material), //
                 new Triangle(points[109], points[110], points[114]).setEmission(color).setMaterial(material), //
@@ -908,7 +914,8 @@ class TeapotTest {
                 new Triangle(points[140], points[139], points[135]).setEmission(color).setMaterial(material), //
                 new Triangle(points[135], points[136], points[140]).setEmission(color).setMaterial(material), //
                 new Triangle(points[141], points[80], points[75]).setEmission(color).setMaterial(material), //
-                new Triangle(points[75], points[137], points[141]).setEmission(color).setMaterial(material), //
+                new Triangle(points[75], points[137], points[141]).setEmission(color).setMaterial(material));
+        Geometries part10=new Geometries(
                 new Triangle(points[142], points[141], points[137]).setEmission(color).setMaterial(material), //
                 new Triangle(points[137], points[138], points[142]).setEmission(color).setMaterial(material), //
                 new Triangle(points[143], points[142], points[138]).setEmission(color).setMaterial(material), //
@@ -986,7 +993,9 @@ class TeapotTest {
                 new Triangle(points[179], points[178], points[174]).setEmission(color).setMaterial(material), //
                 new Triangle(points[174], points[175], points[179]).setEmission(color).setMaterial(material), //
                 new Triangle(points[180], points[179], points[175]).setEmission(color).setMaterial(material), //
-                new Triangle(points[175], points[176], points[180]).setEmission(color).setMaterial(material), //
+                new Triangle(points[175], points[176], points[180]).setEmission(color).setMaterial(material)
+        );
+        Geometries part11=new Geometries(
                 new Triangle(points[181], points[120], points[116]).setEmission(color).setMaterial(material), //
                 new Triangle(points[116], points[177], points[181]).setEmission(color).setMaterial(material), //
                 new Triangle(points[182], points[181], points[177]).setEmission(color).setMaterial(material), //
@@ -1141,7 +1150,8 @@ class TeapotTest {
                 new Triangle(points[246], points[247], points[250]).setEmission(color).setMaterial(material), //
                 new Triangle(points[251], points[250], points[247]).setEmission(color).setMaterial(material), //
                 new Triangle(points[247], points[248], points[251]).setEmission(color).setMaterial(material), //
-                new Triangle(points[212], points[251], points[248]).setEmission(color).setMaterial(material), //
+                new Triangle(points[212], points[251], points[248]).setEmission(color).setMaterial(material));
+        Geometries part12=new Geometries(
                 new Triangle(points[252], points[204], points[200]).setEmission(color).setMaterial(material), //
                 new Triangle(points[200], points[249], points[252]).setEmission(color).setMaterial(material), //
                 new Triangle(points[253], points[252], points[249]).setEmission(color).setMaterial(material), //
@@ -1205,7 +1215,8 @@ class TeapotTest {
                 new Triangle(points[281], points[282], points[287]).setEmission(color).setMaterial(material), //
                 new Triangle(points[289], points[288], points[283]).setEmission(color).setMaterial(material), //
                 new Triangle(points[283], points[284], points[289]).setEmission(color).setMaterial(material), //
-                new Triangle(points[290], points[289], points[284]).setEmission(color).setMaterial(material), //
+                new Triangle(points[290], points[289], points[284]).setEmission(color).setMaterial(material));
+        Geometries part13=new Geometries(
                 new Triangle(points[284], points[285], points[290]).setEmission(color).setMaterial(material), //
                 new Triangle(points[291], points[290], points[285]).setEmission(color).setMaterial(material), //
                 new Triangle(points[285], points[286], points[291]).setEmission(color).setMaterial(material), //
@@ -1277,7 +1288,8 @@ class TeapotTest {
                 new Triangle(points[320], points[321], points[325]).setEmission(color).setMaterial(material), //
                 new Triangle(points[326], points[297], points[292]).setEmission(color).setMaterial(material), //
                 new Triangle(points[292], points[322], points[326]).setEmission(color).setMaterial(material), //
-                new Triangle(points[327], points[326], points[322]).setEmission(color).setMaterial(material), //
+                new Triangle(points[327], points[326], points[322]).setEmission(color).setMaterial(material));
+        Geometries part14=new Geometries(
                 new Triangle(points[322], points[323], points[327]).setEmission(color).setMaterial(material), //
                 new Triangle(points[328], points[327], points[323]).setEmission(color).setMaterial(material), //
                 new Triangle(points[323], points[324], points[328]).setEmission(color).setMaterial(material), //
@@ -1367,7 +1379,9 @@ class TeapotTest {
                 new Triangle(points[339], points[374], points[378]).setEmission(color).setMaterial(material), //
                 new Triangle(points[379], points[378], points[374]).setEmission(color).setMaterial(material), //
                 new Triangle(points[374], points[375], points[379]).setEmission(color).setMaterial(material), //
-                new Triangle(points[380], points[379], points[375]).setEmission(color).setMaterial(material), //
+                new Triangle(points[380], points[379], points[375]).setEmission(color).setMaterial(material));
+        Geometries part15=new Geometries(
+
                 new Triangle(points[375], points[376], points[380]).setEmission(color).setMaterial(material), //
                 new Triangle(points[381], points[380], points[376]).setEmission(color).setMaterial(material), //
                 new Triangle(points[376], points[377], points[381]).setEmission(color).setMaterial(material), //
@@ -1470,7 +1484,8 @@ class TeapotTest {
                 new Triangle(points[429], points[430], points[434]).setEmission(color).setMaterial(material), //
                 new Triangle(points[402], points[431], points[435]).setEmission(color).setMaterial(material), //
                 new Triangle(points[436], points[435], points[431]).setEmission(color).setMaterial(material), //
-                new Triangle(points[431], points[432], points[436]).setEmission(color).setMaterial(material), //
+                new Triangle(points[431], points[432], points[436]).setEmission(color).setMaterial(material));
+        Geometries part16=new Geometries(
                 new Triangle(points[437], points[436], points[432]).setEmission(color).setMaterial(material), //
                 new Triangle(points[432], points[433], points[437]).setEmission(color).setMaterial(material), //
                 new Triangle(points[438], points[437], points[433]).setEmission(color).setMaterial(material), //
@@ -1586,7 +1601,8 @@ class TeapotTest {
                 new Triangle(points[497], points[496], points[492]).setEmission(color).setMaterial(material), //
                 new Triangle(points[492], points[493], points[497]).setEmission(color).setMaterial(material), //
                 new Triangle(points[498], points[497], points[493]).setEmission(color).setMaterial(material), //
-                new Triangle(points[493], points[494], points[498]).setEmission(color).setMaterial(material), //
+                new Triangle(points[493], points[494], points[498]).setEmission(color).setMaterial(material));
+        Geometries part17=new Geometries(
                 new Triangle(points[499], points[438], points[434]).setEmission(color).setMaterial(material), //
                 new Triangle(points[434], points[495], points[499]).setEmission(color).setMaterial(material), //
                 new Triangle(points[500], points[499], points[495]).setEmission(color).setMaterial(material), //
@@ -1658,8 +1674,9 @@ class TeapotTest {
                 new Triangle(points[469], points[468], points[528]).setEmission(color).setMaterial(material), //
                 new Triangle(points[528], points[529], points[469]).setEmission(color).setMaterial(material), //
                 new Triangle(points[470], points[469], points[529]).setEmission(color).setMaterial(material), //
-                new Triangle(points[529], points[530], points[470]).setEmission(color).setMaterial(material) //
-        );
+                new Triangle(points[529], points[530], points[470]).setEmission(color).setMaterial(material)); //
+        scene.geometries.add(part1, part2, part3, part4, part5, part6, part7, part8, //);
+                part9, part10, part11, part12, part13, part14, part15, part16, part17);
     }
 
     /** the field is used for creating the bubbles from the teapot */

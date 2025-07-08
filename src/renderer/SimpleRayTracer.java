@@ -329,4 +329,5 @@ public class SimpleRayTracer extends RayTracerBase {
         double rdxn = r.dotProduct(intersection.direction);
         return intersection.material.kS.scale(Math.pow(Math.max(0, -1 * rdxn), intersection.material.nSh));
     }
+
 }

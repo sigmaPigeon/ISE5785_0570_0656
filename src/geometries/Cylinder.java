@@ -107,6 +107,7 @@ public class Cylinder extends Tube{
     }
     @Override
     public void computeBoundingBox() {
+        bvhIsOn=true;
         // Compute bounding box for a finite cylinder
         // Assume axisRay is the axis, height is the length, and radius is the radius
         Point p0 = axis.getHead();

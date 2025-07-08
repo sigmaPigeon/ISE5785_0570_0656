@@ -93,6 +93,7 @@ public class Tube extends RadialGeometry{
     }
     @Override
     public void computeBoundingBox() {
+        bvhIsOn = true;
         // Tube is infinite; no finite bounding box.
         box = null;
     }

@@ -65,14 +65,14 @@ public class Geometries extends Intersectable {
     public void computeBoundingBox() {
         if (geometries.isEmpty()) return;
         geometries.forEach(Intersectable::computeBoundingBox);
-
+        bvhIsOn=true;
         double minX = Double.POSITIVE_INFINITY, minY = Double.POSITIVE_INFINITY, minZ = Double.POSITIVE_INFINITY;
         double maxX = Double.NEGATIVE_INFINITY, maxY = Double.NEGATIVE_INFINITY, maxZ = Double.NEGATIVE_INFINITY;
 
         for (Intersectable g : geometries) {
             AABB box = g.box;
             if (box == null) continue;
-            Point min = box., max = box.max;
+            Point min = box.min, max = box.max;
             if (min.getX() < minX) minX = min.getX();
             if (min.getY() < minY) minY = min.getY();
             if (min.getZ() < minZ) minZ = min.getZ();
@@ -81,6 +81,29 @@ public class Geometries extends Intersectable {
             if (max.getZ() > maxZ) maxZ = max.getZ();
         }
         box = new AABB(new Point(minX, minY, minZ), new Point(maxX, maxY, maxZ));
+
+    }
+
+    public void createHierarchy() {
+        if (geometries.size()==1) {
+            geometries.getFirst().computeBoundingBox();
+        }
+        else {
+            List<Intersectable> newGeometries=new LinkedList<>();
+            for (int i = 0; i < geometries.size() - 1; i += 2) {
+                Geometries tmp = new Geometries(geometries.get(i), geometries.get(i + 1));
+                tmp.computeBoundingBox();
+               newGeometries.add(tmp);
+            }
+            if (geometries.size() % 2 == 1) {
+                geometries.getLast().computeBoundingBox();
+                newGeometries.add(geometries.getLast());
+            }
+            geometries.clear();
+            geometries.addAll(newGeometries); // Recursively create hierarchy until only one geometry remains
+            createHierarchy();
+        }
+
 
     }
 }

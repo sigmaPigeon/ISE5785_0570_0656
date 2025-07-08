@@ -76,7 +76,7 @@ public class Sphere extends RadialGeometry {
     }
     @Override
     public void computeBoundingBox() {
-
+        bvhIsOn = true;
         Point rad = new Point(radius,radius,radius);
         // The bounding box of a sphere is a cube with side length equal to the diameter of the sphere
        box= new AABB(
