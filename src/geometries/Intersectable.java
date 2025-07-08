@@ -10,6 +10,8 @@ import java.util.List;
  * This class defines methods to find intersection points and details of intersections.
  */
 public abstract class Intersectable {
+
+
     /**
      * Class to represent an intersection between a ray and a geometry.
      * Stores the geometry, intersection point, material, and additional intersection details.
@@ -65,8 +67,7 @@ public abstract class Intersectable {
             tmax = tzmax;
         return true;
     }
-    protected AABB box=new AABB(new Point(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY),
-            new Point(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY));
+    protected AABB box=null;
 
     protected boolean bvhIsOn = false;
     public static class Intersection {
@@ -187,4 +188,10 @@ public abstract class Intersectable {
      * @return the bounding box
      */
     public abstract void computeBoundingBox();
+    public void initializebox() {
+        if(box==null) {
+            computeBoundingBox();
+        }
+
+    }
 }
